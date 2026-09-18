@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>프로그램 상세 — 비오케이아트센터 (시안 A)</title>
-<link rel="stylesheet" href="fonts.css">
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="fonts.css?v=202609181448">
+<link rel="stylesheet" href="site.css?v=202609181448">
 <style>
 /* PC: 왼쪽 포스터 고정(sticky) + 가운데 본문 + 오른쪽 예매 패널 고정. 모바일: 포스터→요약→본문, 예매는 하단 고정 바. */
 .detail{display:grid;grid-template-columns:340px minmax(0,1fr) 320px;gap:56px;align-items:start;padding-top:28px}
@@ -107,8 +107,8 @@ h1{font-weight:700;font-size:clamp(28px,3vw,44px);line-height:1.25;margin:14px 0
 
 <div class="mbar" role="group" aria-label="예매"><a class="btn red" href="https://tickets.interpark.com/goods/26008522" target="_blank" rel="noopener">NOL티켓 예매</a><a class="btn" href="#">티켓링크</a></div>
 
-<script src="data.js"></script>
-<script src="site.js"></script>
+<script src="data.js?v=202609181448"></script>
+<script src="site.js?v=202609181448"></script>
 <script>
 const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 document.querySelector("#rail").innerHTML=window.BOK.programs.filter(p=>p.id!=="p705").map(p=>`

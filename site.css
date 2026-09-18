@@ -10,7 +10,7 @@
 }
 @media(max-width:899px){:root{--gut:20px;--sec:56px;--bar:64px}}
 *{box-sizing:border-box;margin:0}
-html{scroll-padding-top:calc(var(--bar) + 16px)}
+html{scroll-padding-top:calc(var(--bar) + 16px);-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;word-break:keep-all;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
