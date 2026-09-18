@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>비오케이아트센터 시안</title>
 <link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="site.css">
@@ -33,8 +38,8 @@
 .visit dl{display:grid;grid-template-columns:64px 1fr;gap:10px 12px;font-size:14px;margin-bottom:18px}
 .visit dt{color:var(--ink-2);font-size:13px}
 </style>
-<script>document.body.dataset.nav="";document.body.dataset.header="over";</script>
-
+</head>
+<body data-nav="" data-header="over">
 <main id="main">
 <div class="hero curtain">
   <img src="assets/hall-e.jpg" alt="어두운 객석 너머, 조명 한 점을 받은 무대 위 그랜드 피아노">
@@ -99,3 +104,5 @@ $("#nlist").innerHTML=D.notices.slice(0,4).map(n=>`<a href="notice.html"><span>$
 $("#v-addr").textContent=D.visit.address;$("#v-gal").textContent=D.visit.gallery;$("#v-tel").textContent=D.visit.tel;
 $("#wave").innerHTML=Array.from({length:34},(_,i)=>`<i style="--i:${i};--h:${Math.round(18+70*Math.abs(Math.sin(i*.42))*(.55+.45*Math.cos(i*.17)))}"></i>`).join("");
 </script>
+</body>
+</html>
