@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>공연장 — 비오케이아트센터 (시안 A)</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="site.css">
+<style>
+/* 히어로: 어둠 속 조명 한 점. 제원 숫자를 같은 화면에. */
+.hero{position:relative;height:100svh;min-height:520px;max-height:760px;display:flex;align-items:flex-end;overflow:hidden}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 40%,var(--bg) 92%),linear-gradient(90deg,#15110fcc,#15110f66 40%,transparent 62%)}
+.hero .wrap{position:relative;z-index:1;width:100%;padding-bottom:40px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+.hero h1{font-weight:700;font-size:clamp(44px,6vw,92px);line-height:1.05;margin:10px 0 14px}
+.hero p.lead{color:var(--ink-3);max-width:30em;font-size:17px}
+.tabs{display:flex;gap:8px;margin-bottom:6px}
+.tabs a{font-size:14px;padding:8px 16px;border:1px solid #ffffff40;border-radius:99px}
+.tabs a[aria-current]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.nums{display:grid;grid-template-columns:repeat(4,auto);gap:0 36px;border-top:1px solid #ffffff30;padding-top:14px}
+.nums div{font-size:12px;color:var(--ink-2)}
+.nums strong{display:block;font-family:var(--serif);font-size:28px;font-weight:600;color:var(--ink);line-height:1.2}
+@media(max-width:1099px){.hero .wrap{grid-template-columns:1fr}}
+@media(max-width:899px){.hero{height:auto;min-height:78svh;max-height:none}.hero>img{height:56%;object-position:50% 40%}.hero::after{background:linear-gradient(180deg,transparent 25%,var(--bg) 56%)}.hero .wrap{padding-top:46svh}.nums{grid-template-columns:repeat(2,1fr);gap:16px 24px}}
+
+/* 둘러보기: PC는 평면도(왼쪽)와 뷰어(오른쪽)를 한 화면에, 모바일은 뷰어 → 위치 칩 → 평면도 */
+.tour{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px;align-items:stretch}
+.plan,.viewer{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.plan .stage{position:relative}
+.plan img{width:100%;filter:invert(.92) hue-rotate(180deg) saturate(.6) brightness(.95)}
+.spot{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+.spot i{width:26px;height:26px;border-radius:50%;background:var(--bg);border:2px solid var(--wood);color:var(--wood);font-style:normal;font-size:12px;font-weight:700;display:grid;place-items:center;transition:.2s}
+.spot::before{content:"";position:absolute;width:0;height:0;border:7px solid transparent;border-bottom:16px solid #d2a46a99;transform:rotate(var(--dir)) translateY(-22px);transform-origin:center}
+.spot[aria-pressed=true] i,.spot:hover i{background:var(--wood);color:#1a1206;transform:scale(1.15)}
+.plan figcaption,.viewer figcaption{padding:14px 18px;font-size:13px;color:var(--ink-2);border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.viewer{display:flex;flex-direction:column}
+.viewer .shot{position:relative;flex:1;min-height:320px;background:#000}
+.viewer .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .35s}
+.viewer .mode{position:absolute;right:12px;top:12px;display:flex;gap:6px;z-index:2}
+.chips{display:none;gap:8px;overflow-x:auto;padding:12px 0;scrollbar-width:none}
+.chips button{white-space:nowrap;min-height:44px;padding:0 14px;border-radius:99px;border:1px solid var(--line);background:none;font-size:14px;color:var(--ink-2)}
+.chips button[aria-pressed=true]{background:var(--wood);border-color:var(--wood);color:#1a1206;font-weight:600}
+@media(max-width:899px){.tour{grid-template-columns:1fr}.viewer{order:-1}.viewer .shot{min-height:0;aspect-ratio:16/10}.chips{display:flex}}
+
+/* 제원·자료 */
+.specs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+.box{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.box h3{font-family:var(--serif);font-size:20px;font-weight:600;margin-bottom:12px}
+.box dl.facts dt,.box dl.facts dd{font-size:14px;padding:10px 0}
+.dl a{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);font-size:14px;min-height:48px}
+.dl a:hover{color:var(--wood)}.dl a span{color:var(--ink-2);font-size:12px}
+.wave{display:flex;align-items:center;gap:4px;height:64px;margin:4px 0 16px}
+.wave i{flex:1;background:var(--wood);border-radius:2px;height:calc(var(--h)*1%);animation:w 2.8s ease-in-out infinite;animation-delay:calc(var(--i)*-90ms)}
+@keyframes w{50%{height:calc(var(--h)*.45%)}}
+@media(max-width:1199px){.specs{grid-template-columns:1fr 1fr}.specs .box:last-child{grid-column:1/-1}}
+@media(max-width:899px){.specs{grid-template-columns:1fr}}
+
+.cta{margin-top:var(--sec);background:linear-gradient(90deg,#15110ff2 30%,#15110f99),url(assets/hall-side.jpg) center/cover;border:1px solid var(--line);border-radius:var(--r);padding:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta h2{font-size:clamp(24px,2.6vw,38px)}
+@media(max-width:899px){.cta{padding:28px 20px}.cta .btn{width:100%}}
+</style>
+</head>
+<body data-nav="공간·대관" data-header="over">
+<main id="main">
+  <div class="hero curtain">
+    <img src="assets/hall-e.jpg" alt="어두운 객석 너머 조명을 받은 무대 위 그랜드 피아노">
+    <div class="wrap">
+      <div>
+        <nav class="tabs" aria-label="공간 선택"><a href="space-hall.html" aria-current="page">공연장</a><a href="space-gallery.html">갤러리</a></nav>
+        <h1>공연장</h1>
+        <p class="lead">클래식부터 뮤지컬·컨퍼런스까지. 방문 전에 객석과 무대를 위치별로 확인하고, 도면과 장비 목록을 내려받으세요.</p>
+      </div>
+      <div class="nums" aria-label="주요 제원">
+        <div><strong>220석</strong>객석</div>
+        <div><strong>9.7m</strong>무대 폭 (도면 9,755mm)</div>
+        <div><strong>9.4m</strong>무대 깊이 (도면 9,437mm)</div>
+        <div><strong>4.1m</strong>무대 높이 (도면 4,100mm)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="sec" id="tour">
+      <div class="sec-head rv"><span class="no">01</span><div class="ti"><p class="eyebrow">둘러보기</p><h2>위치를 골라 둘러보기</h2></div><div class="act"><a class="more" href="#docs">도면 내려받기 ↓</a></div></div>
+      <div class="chips" id="chips" role="group" aria-label="촬영 위치"></div>
+      <div class="tour rv">
+        <figure class="plan">
+          <div class="stage" id="plan"><img src="assets/plan-hall.jpg" alt="공연장 전체 평면도. 왼쪽 객석, 오른쪽 무대. 번호는 촬영 위치."></div>
+          <figcaption><span>전체 평면도 · 번호를 누르면 그 자리에서 본 모습이 나옵니다</span><span>← 객석 | 무대 →</span></figcaption>
+        </figure>
+        <figure class="viewer">
+          <div class="shot" id="shot">
+            <div class="mode"><span class="badge" style="background:var(--wood);color:#1a1206">사진</span><span class="badge" title="실제 촬영본 준비 후 제공">360° 준비 중</span></div>
+          </div>
+          <figcaption><strong id="cap-t" style="color:var(--ink)"></strong><span id="cap-d"></span></figcaption>
+        </figure>
+      </div>
+      <p class="note" style="margin-top:16px">사진은 실제 촬영본입니다. 촬영 위치 표시는 시안용 추정이며, 정확한 제원은 도면을 기준으로 합니다.</p>
+    </section>
+
+    <section class="sec" id="docs">
+      <div class="sec-head rv"><span class="no">02</span><div class="ti"><p class="eyebrow">제원과 자료</p><h2>제원과 자료</h2></div></div>
+      <div class="specs">
+        <div class="box rv"><h3>무대 제원</h3>
+          <dl class="facts"><dt>객석</dt><dd>220석 (휠체어석 도면 표기 2석)</dd><dt>무대 폭</dt><dd>9,755mm</dd><dt>무대 깊이</dt><dd>9,437mm</dd><dt>무대 높이</dt><dd>4,100mm</dd><dt>무대 단</dt><dd>600mm</dd></dl>
+          <p class="note" style="margin-top:14px">현재 홈페이지 도면 이미지에 표기된 값입니다. 공개 전 실측·원본 도면으로 확인이 필요합니다.</p></div>
+        <div class="box rv"><h3>도면·장비 목록</h3>
+          <div class="dl"><a href="#">전체 평면도 <span>PDF ↓</span></a><a href="#">전체 단면도 <span>PDF ↓</span></a><a href="#">무대 평면도·단면도 <span>PDF ↓</span></a><a href="#">음향 장비 목록 <span>PDF ↓</span></a><a href="#">조명·영상 장비 목록 <span>PDF ↓</span></a></div></div>
+        <div class="box rv"><p class="eyebrow">음향</p><h3 style="margin-top:6px">같은 연주, 다른 울림</h3>
+          <div class="wave" id="wave" aria-hidden="true"></div>
+          <p style="font-size:14px;color:var(--ink-3);margin-bottom:16px">Müller-BBM의 음장가변 시스템 VICELLO 설치(2019). OFF와 실제 프리셋을 같은 음원의 현장 녹음으로 비교해 들을 수 있게 준비하고 있습니다.</p>
+          <p class="btns"><a class="btn sm" aria-disabled="true" href="#">들어보기 · 준비 중</a><a class="btn sm" href="rental.html">현장 청음 문의</a></p></div>
+      </div>
+    </section>
+
+    <div class="cta rv"><div><p class="eyebrow">대관</p><h2>이 공간에서 공연을 준비하신다면</h2><p style="color:var(--ink-3);margin-top:8px">희망일을 남겨 주시면 담당자가 가능 여부를 확인해 연락드립니다.</p></div>
+      <p class="btns"><a class="btn solid" href="rental.html">희망일로 대관 문의</a><a class="btn" href="rental.html#steps">절차·요금 보기</a></p></div>
+  </div>
+</main>
+
+<script src="site.js"></script>
+<script>
+// 촬영 위치(평면도 기준 %). dir: 바라보는 방향(도), 0=위. 좌표는 시안용 추정.
+const SPOTS=[
+ {n:1,x:13,y:55,dir:90,img:"assets/hall-d.jpg",t:"객석 맨 뒤 중앙",d:"무대 전체가 한눈에 들어오는 자리"},
+ {n:2,x:72,y:55,dir:270,img:"assets/hall-seats.jpg",t:"무대 중앙",d:"연주자가 바라보는 객석"},
+ {n:3,x:70,y:80,dir:300,img:"assets/hall-side.jpg",t:"무대 옆",d:"객석 경사와 목재 벽면"},
+ {n:4,x:90,y:55,dir:270,img:"assets/hall-stage.jpg",t:"무대 안쪽",d:"피아노 너머 객석 · 상부 조명 바"},
+];
+const plan=document.querySelector("#plan"),shot=document.querySelector("#shot"),chips=document.querySelector("#chips");
+SPOTS.forEach(s=>{
+  plan.insertAdjacentHTML("beforeend",`<button class="spot" data-n="${s.n}" style="left:${s.x}%;top:${s.y}%;--dir:${s.dir}deg" aria-pressed="false" aria-label="${s.n}번 위치: ${s.t}"><i>${s.n}</i></button>`);
+  chips.insertAdjacentHTML("beforeend",`<button data-n="${s.n}" aria-pressed="false">${s.n} · ${s.t}</button>`);
+  shot.insertAdjacentHTML("beforeend",`<img data-n="${s.n}" src="${s.img}" alt="${s.t}에서 본 공연장" style="opacity:0" loading="lazy">`);
+});
+function pick(n){const s=SPOTS.find(v=>v.n==n);
+  document.querySelectorAll("[data-n]").forEach(el=>{const on=el.dataset.n==n; if(el.tagName==="IMG") el.style.opacity=on?1:0; else el.setAttribute("aria-pressed",on)});
+  document.querySelector("#cap-t").textContent=`${s.n} · ${s.t}`;document.querySelector("#cap-d").textContent=s.d}
+document.addEventListener("click",e=>{const b=e.target.closest("button[data-n]");if(b)pick(b.dataset.n)});
+pick(1);
+document.querySelector("#wave").innerHTML=Array.from({length:30},(_,i)=>`<i style="--i:${i};--h:${Math.round(18+70*Math.abs(Math.sin(i*.42))*(.55+.45*Math.cos(i*.17)))}"></i>`).join("");
+</script>
+</body>
+</html>

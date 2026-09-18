@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자인 기준서 — 비오케이아트센터 (시안 A)</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="site.css">
+<style>
+/* 기준서 전용 레이아웃: 왼쪽 목차 고정 + 오른쪽 본문 */
+.sg{display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px;padding-top:32px}
+.toc{position:sticky;top:calc(var(--bar) + 24px);font-size:14px}
+.toc a{display:block;padding:8px 0;color:var(--ink-2);border-left:1px solid var(--line);padding-left:14px}
+.toc a:hover{color:var(--wood);border-color:var(--wood)}
+.sg h1{font-weight:700;font-size:clamp(34px,4vw,56px);line-height:1.1;margin:8px 0 12px}
+.sg section{padding-top:64px}.sg section:first-of-type{padding-top:0}
+.sg h2{margin-bottom:8px}.sg h2+p{color:var(--ink-2);max-width:60ch;margin-bottom:24px}
+.sg h3{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--wood);margin:32px 0 12px}
+.rule{display:grid;grid-template-columns:180px 1fr;gap:6px 20px;padding:12px 0;border-top:1px solid var(--line);font-size:14px}
+.rule b{color:var(--ink)}.rule span{color:var(--ink-3)}
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.sw div{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;font-size:13px}
+.sw i{display:block;height:72px}
+.sw p{padding:10px 12px;color:var(--ink-2)}.sw p b{display:block;color:var(--ink);font-family:ui-monospace,monospace;font-size:12px;letter-spacing:0}
+.sw p em{font-style:normal;color:var(--wood)}
+.type div{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:baseline;padding:14px 0;border-top:1px solid var(--line)}
+.type small{font-size:12px;color:var(--ink-2);font-family:ui-monospace,monospace;letter-spacing:0}
+.space{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.space i{display:block;background:var(--wood);width:var(--w);height:var(--w);opacity:.9}
+.space div{font-size:12px;color:var(--ink-2);text-align:center}
+.demo{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.row{display:grid;grid-template-columns:56px 1fr auto;gap:16px;align-items:center;padding:14px 8px;border-bottom:1px solid var(--line)}
+.day{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1;text-align:center}
+.day small{display:block;font-family:var(--sans);font-size:11px;color:var(--ink-2);margin-top:4px;font-weight:400}
+.row h4{font-size:15px;font-weight:600}.row .sub{font-size:12px;color:var(--ink-2)}.row .go{font-size:12px;color:var(--wood)}
+.strip{display:grid;grid-template-columns:repeat(14,1fr);gap:2px}
+.strip button,.strip span{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0 10px;font-size:13px;border:0;background:none;color:#4d5261;border-radius:var(--r);position:relative}
+.strip small{font-size:10px;opacity:.8}.strip button{color:var(--ink);font-weight:700;cursor:pointer}
+.strip button::after{content:"";position:absolute;bottom:3px;width:4px;height:4px;border-radius:50%;background:var(--wood)}
+.strip button[aria-pressed=true]{background:var(--wood);color:#1a1206}.strip button[aria-pressed=true]::after{background:#1a1206}
+.field{display:grid;gap:6px;font-size:14px;color:var(--ink-3)}
+.field input{width:100%;min-height:50px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;font-size:16px}
+.field input:focus{outline:0;border-color:var(--wood);box-shadow:0 0 0 3px #d2a46a33}
+.photo{display:grid;grid-template-columns:1fr 1fr;gap:12px}.photo img{aspect-ratio:16/9;object-fit:cover;width:100%;border-radius:var(--r)}
+.photo figcaption{font-size:12px;color:var(--ink-2);margin-top:6px}
+.chk li{padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink-3)}
+@media(max-width:899px){.sg{grid-template-columns:1fr;gap:24px}.toc{position:static;display:flex;flex-wrap:wrap;gap:4px}.toc a{border:1px solid var(--line);border-radius:99px;padding:6px 12px}.rule,.type div{grid-template-columns:1fr}.grid2,.photo{grid-template-columns:1fr}.strip{grid-template-columns:repeat(7,1fr)}}
+</style>
+</head>
+<body data-nav="">
+<main id="main"><div class="wrap sg">
+<nav class="toc" aria-label="기준서 목차">
+  <a href="#p">원칙</a><a href="#c">색</a><a href="#t">글자</a><a href="#s">여백·격자</a><a href="#k">구성 요소</a><a href="#m">모션</a><a href="#i">사진</a><a href="#st">상태 규칙</a><a href="#a">접근성 점검</a>
+</nav>
+<div>
+<section id="p"><p class="eyebrow">디자인 기준서 · v0.3 · 2026-09-18</p><h1>디자인 기준서</h1>
+<p style="color:var(--ink-2);max-width:60ch">시안 A(어두운 무대)의 규칙을 한 장으로 모았습니다. 새 페이지나 요소를 만들 때는 이 기준서의 값만 씁니다. 값을 바꿀 때는 여기부터 고칩니다.</p>
+<h3>원칙 다섯 가지</h3>
+<div class="rule"><b>어둠 속 한 점의 빛</b><span>바탕은 커튼 뒤의 따뜻한 검정, 글자는 크림색, 포인트는 금빛 호박색 하나. 빨강은 로고와 "예매중"에만 씁니다. 은은한 광원과 필름 입자로 무대의 공기를 만듭니다.</span></div>
+<div class="rule"><b>날짜가 먼저</b><span>공연 정보에서는 날짜·요일·시각이 제목보다 크거나 앞에 옵니다. (롯데콘서트홀·금호아트홀 참고)</span></div>
+<div class="rule"><b>포스터는 손대지 않는다</b><span>포스터 색은 그대로 두고, 공간·행사 사진에만 같은 톤 보정을 입힙니다.</span></div>
+<div class="rule"><b>PC와 모바일을 따로 설계한다</b><span>코드는 한 벌이지만 배치는 1199px·899px에서 바뀝니다. 새 화면은 PC 배치와 모바일 배치를 둘 다 그립니다.</span></div>
+<div class="rule"><b>근거 없는 건 표시하지 않는다</b><span>확인되지 않은 수치·문구·기능(360°, 음향 체험)은 "준비 중"으로 두고, 추정값은 화면에 추정이라고 적습니다.</span></div>
+</section>
+
+<section id="c"><h2>색</h2><p>바탕 3단계, 글자 3단계, 포인트 1개, 경고 1개. 아래 대비값은 이 페이지가 열릴 때 계산합니다(WCAG 기준 본문 4.5 이상, 큰 글자 3 이상).</p>
+<div class="sw" id="sw"></div>
+<h3>쓰임</h3>
+<div class="rule"><b>--bg / --bg-2 / --bg-3</b><span>페이지 바탕 / 카드·패널 / 눌린 요소·배지 바탕. 그 밖의 회색은 만들지 않습니다.</span></div>
+<div class="rule"><b>--ink / --ink-3 / --ink-2</b><span>제목·본문 / 설명 문단 / 보조 정보·라벨. --ink-2는 12px 이하에서 쓰지 않습니다(대비 부족).</span></div>
+<div class="rule"><b>--wood</b><span>포인트. 눈썹 제목(eyebrow), 링크 호버, 활성 상태, 주요 버튼(solid) 바탕, 초점 테두리.</span></div>
+<div class="rule"><b>--red</b><span>로고의 BOK, "예매중" 배지, 필수 입력 표시(*). 그 외 금지.</span></div>
+<div class="rule"><b>--line · 면</b><span>직선 구분선은 표와 목록 안에서만(#ffffff12). 섹션은 선이 아니라 여백과 빛이 스민 면(.panel)으로 나눕니다. 그림자는 포스터와 면에만.</span></div>
+</section>
+
+<section id="t"><h2>글자</h2><p>제목은 마루 부리(네이버, 상업 이용 무료·최대 굵기 700), 본문은 Pretendard(가변). 한글은 <code>word-break:keep-all</code>로 단어 단위로 줄을 바꿉니다.</p>
+<div class="type">
+  <div><small>display · 마루부리 700 · clamp(44, 7vw, 108) · 1.08 · -0.03em</small><span class="serif" style="font-weight:700;font-size:clamp(44px,5vw,72px);line-height:1.08;letter-spacing:-.03em">가까이에서 듣는 무대</span></div>
+  <div><small>h1 · 마루부리 700 · clamp(34, 4vw, 60) · 1.15</small><span class="serif" style="font-weight:700;font-size:clamp(34px,4vw,60px);line-height:1.15">희망일로 대관 문의</span></div>
+  <div><small>h2 · 마루부리 600 · clamp(28, 2.8vw, 42) · 1.2</small><span class="serif" style="font-weight:600;font-size:clamp(28px,2.8vw,42px);line-height:1.2">지금, 그리고 곧</span></div>
+  <div><small>날짜 큰 숫자 · 마루부리 700 · 44 / 30</small><span class="serif" style="font-weight:700;font-size:44px;line-height:1">10.3 <span style="font-size:30px;font-weight:600">16</span></span></div>
+  <div><small>h3 · Pretendard 600 · 20~22 · 1.35</small><span style="font-weight:600;font-size:22px;line-height:1.35">할인 안내</span></div>
+  <div><small>카드 제목 · Pretendard 600 · 15~17 · 1.4 · 2줄 말줄임</small><span style="font-weight:600;font-size:16px">지브리와 사랑에 빠지다 : 지브리 영화음악 콘서트 2026 — 세종</span></div>
+  <div><small>본문 · Pretendard 400 · 16 · 1.6</small><span>220석 공연장과 146㎡ 갤러리. 세종의 공연·전시·아카데미가 한 건물에서 열립니다.</span></div>
+  <div><small>보조 · Pretendard 400 · 13~14 · --ink-2</small><span style="font-size:13px;color:var(--ink-2)">공연 · 공연장 · 10.3 토</span></div>
+  <div><small>눈썹 · Pretendard 400 · 12 · 0.22em · 대문자 · --wood</small><span class="eyebrow">Now &amp; Next</span></div>
+</div>
+<h3>규칙</h3>
+<div class="rule"><b>제목 줄 수</b><span>display·h1은 2줄 이내. 카드 제목은 2줄에서 말줄임, 일정 행은 1줄.</span></div>
+<div class="rule"><b>영문 눈썹</b><span>섹션마다 짧은 영문 눈썹 한 줄을 둡니다. 장식이며, 정보는 반드시 한글 제목에 있습니다.</span></div>
+<div class="rule"><b>숫자</b><span>날짜·제원 숫자는 마루 부리, 표 안의 숫자는 Pretendard(<code>tnum</code>)로 자릿수를 맞춥니다.</span></div>
+<div class="rule"><b>최소 크기</b><span>본문 16px, 보조 13px, 라벨 12px 미만 금지. 모바일에서도 같습니다.</span></div>
+</section>
+
+<section id="s"><h2>여백·격자</h2><p>기본 단위 4px. 자주 쓰는 단계만 씁니다.</p>
+<div class="space">
+  <div><i style="--w:8px"></i>8</div><div><i style="--w:16px"></i>16</div><div><i style="--w:24px"></i>24</div><div><i style="--w:40px"></i>40</div><div><i style="--w:56px"></i>56</div><div><i style="--w:88px"></i>88</div>
+</div>
+<h3>격자</h3>
+<div class="rule"><b>최대 폭 · 좌우 여백</b><span>1440px · PC 48px / 모바일 20px</span></div>
+<div class="rule"><b>섹션 간격</b><span>PC 88px / 모바일 56~64px. 섹션 안 제목과 내용 사이 24~28px.</span></div>
+<div class="rule"><b>분기점</b><span>1199px 이하 태블릿(2단), 899px 이하 모바일(1단). PC는 1280~1600px에서 먼저 확인합니다.</span></div>
+<div class="rule"><b>포스터 열</b><span>PC 6열(간격 24) / 태블릿 4열 / 모바일 2.2열(가로 스크롤, 62vw 카드 1.6열은 홈에서만)</span></div>
+<div class="rule"><b>모서리</b><span>2px. 배지·칩만 완전한 원(99px). 카드에 큰 둥근 모서리를 쓰지 않습니다.</span></div>
+</section>
+
+<section id="k"><h2>구성 요소</h2><p>site.css에 있는 것만 씁니다. 새 요소가 필요하면 여기에 먼저 추가합니다.</p>
+<h3>버튼</h3>
+<div class="demo"><a class="btn solid" href="#">주요 동작</a><a class="btn" href="#">보조 동작</a><a class="btn red" href="#">NOL티켓에서 예매 ↗</a><a class="btn sm" href="#">작은 버튼</a><a class="btn" aria-disabled="true" href="#">준비 중 · 점선</a></div>
+<div class="rule"><b>규칙</b><span>한 화면에 solid는 하나. 외부 예매만 빨강. 높이 48(작은 것 40), 터치 영역 44px 이상. 예매 버튼 이름에는 예매처 이름을 넣습니다.</span></div>
+<h3>배지·라벨</h3>
+<div class="demo"><span class="badge" data-s="예매중">예매중</span><span class="badge" data-s="전시중">전시중</span><span class="badge" data-s="무료">무료</span><span class="badge">예정</span><span class="badge">매진</span><span class="badge">종료</span><span class="pill">공연</span><span class="pill">클래식</span><span style="font-size:11px;font-weight:600;padding:3px 8px;border-radius:2px;background:#15110fbf;color:var(--wood);box-shadow:inset 0 0 0 1px var(--wood)">기획</span><span style="font-size:11px;font-weight:600;padding:3px 8px;border-radius:2px;background:#15110fbf;color:var(--ink-2)">대관</span></div>
+<div class="rule"><b>상태 배지</b><span>포스터 왼쪽 위. 색이 있는 것은 예매중(빨강)·전시중(호박)·무료(밝음) 셋뿐. 나머지는 회색.</span></div>
+<div class="rule"><b>기획·대관 라벨</b><span>포스터 오른쪽 위. 기획만 호박색 테두리로 강조합니다.</span></div>
+<h3>포스터 카드</h3>
+<div class="rail" style="grid-auto-columns:200px">
+  <a class="card" href="#"><div class="poster"><img src="assets/p705.jpg" alt=""><span class="badge" data-s="예매중">예매중</span></div><div class="meta">공연 · 공연장</div><h3 style="margin:0;letter-spacing:0;text-transform:none;color:var(--ink)">지브리와 사랑에 빠지다 : 지브리 영화음악 콘서트 2026 — 세종</h3><p>10.3 토</p></a>
+  <a class="card" href="#"><div class="poster"><img src="assets/g729.jpg" alt=""><span class="badge" data-s="전시중">전시중</span></div><div class="meta">전시 · 갤러리</div><h3 style="margin:0;letter-spacing:0;text-transform:none;color:var(--ink)">김나원 초대개인전 — 색의 시선</h3><p>9.15 화 – 9.23 수</p></a>
+</div>
+<div class="rule"><b>글 순서</b><span>배지 → (포스터) → 유형·장소 → 제목(2줄) → 날짜. 순서를 바꾸지 않습니다.</span></div>
+<h3>일정 행 · 날짜 띠</h3>
+<div class="strip" aria-label="예시"><span>1<small>목</small></span><span>2<small>금</small></span><button aria-pressed="false">3<small>토</small></button><span>4<small>일</small></span><span>5<small>월</small></span><button aria-pressed="true">6<small>화</small></button><span>7<small>수</small></span><span>8<small>목</small></span><button aria-pressed="false">9<small>금</small></button><button aria-pressed="false">10<small>토</small></button><span>11<small>일</small></span><span>12<small>월</small></span><span>13<small>화</small></span><span>14<small>수</small></span></div>
+<div class="row"><div class="day">6<small>화부터</small></div><div><div class="sub">전시 · 갤러리 · 10.6 화 – 10.11 일</div><h4>매곡 최수룡 개인전 — 얼씨구좋다 書畵야놀자</h4></div><div class="go">예정 →</div></div>
+<div class="rule"><b>규칙</b><span>띠는 행사 있는 날만 활성(점 표시). 누르면 목록이 걸러지고 다시 누르면 풀립니다. 기간 행사는 기간 전체를 활성으로.</span></div>
+<h3>입력 · 접이식</h3>
+<div class="grid2">
+  <div class="field"><label>1지망 희망일 <span style="color:var(--red)">*</span></label><input type="date"></div>
+  <div><details class="acc"><summary>유의사항</summary><div class="body">내용</div></details><details class="acc"><summary>취소·환불 안내</summary><div class="body">내용</div></details></div>
+</div>
+<div class="rule"><b>규칙</b><span>입력창 높이 50, 초점은 호박색 테두리와 3px 번짐. 필수는 빨간 별표. 오류 문구는 입력창 바로 아래.</span></div>
+</section>
+
+<section id="m"><h2>모션</h2><p>움직임은 행동을 돕는 곳에만. <code>prefers-reduced-motion</code>이 켜져 있으면 모두 끕니다.</p>
+<div class="rule"><b>200ms</b><span>호버·초점·배지 색 변화</span></div>
+<div class="rule"><b>350ms</b><span>이미지 전환(위치 뷰어), 탭 전환</span></div>
+<div class="rule"><b>600ms · cubic-bezier(.2,.7,.2,1)</b><span>포스터 호버 확대(1.04)</span></div>
+<div class="rule"><b>700~800ms</b><span>스크롤 등장(.rv): 14px 위로 이동하며 나타남. 첫 화면 요소에는 쓰지 않습니다.</span></div>
+<div class="rule"><b>금지</b><span>자동 재생 슬라이드, 시차 스크롤(패럴랙스), 3D·움직이는 배경. 음파 애니메이션은 음향 카드 한 곳만.</span></div>
+</section>
+
+<section id="i"><h2>사진</h2><p>공간·행사 사진은 같은 톤으로 맞추고, 포스터는 그대로 둡니다.</p>
+<div class="photo">
+  <figure><img src="assets/hall-seats.jpg" alt="원본"><figcaption>원본</figcaption></figure>
+  <figure><img src="assets/hall-seats.jpg" alt="보정" style="filter:saturate(.82) contrast(1.04) brightness(.96)"><figcaption>보정 · saturate(.82) contrast(1.04) brightness(.96)</figcaption></figure>
+</div>
+<div class="rule"><b>어두운 덮개</b><span>사진 위 글자는 아래→위 그라데이션(투명→--bg)으로 받칩니다. 글자 아래 밝기가 충분해질 때까지만.</span></div>
+<div class="rule"><b>해상도</b><span>첫 화면 사진은 가로 2400px 이상, 카드 사진 1200px, 포스터 900px. 현재 공연장 사진(1000px)은 교체 대상.</span></div>
+<div class="rule"><b>대체 텍스트</b><span>공간 사진은 "어디에서 본 무엇"을, 포스터는 "○○ 포스터"를 적습니다. 장식 이미지는 빈 alt.</span></div>
+</section>
+
+<section id="st"><h2>상태 규칙</h2><p>사용자에게 보이는 상태는 자동으로 계산합니다. 직원이 직접 누르는 값은 "매진"과 "취소·연기"뿐입니다.</p>
+<div class="rule"><b>1 취소·연기</b><span>수동 지정. 배지 회색, 제목 옆 표시.</span></div>
+<div class="rule"><b>2 종료</b><span>종료일이 지나면 자동. 지난 프로그램으로 이동, 예매 버튼 제거.</span></div>
+<div class="rule"><b>3 매진</b><span>수동 지정. 예매 버튼은 남기되 "매진"으로 표기.</span></div>
+<div class="rule"><b>4 예매중 · 접수중 · 전시중</b><span>접수 시작일이 지났고 링크가 있으면 예매중, 교육은 접수중, 전시 기간 중이면 전시중. 무료 관람은 "무료".</span></div>
+<div class="rule"><b>5 예정</b><span>그 밖의 미래 행사.</span></div>
+</section>
+
+<section id="a"><h2>접근성 점검</h2><p>페이지를 내보내기 전에 확인합니다.</p>
+<ul class="chk" style="list-style:none;padding:0">
+  <li>키보드만으로 메뉴 → 본문 → 버튼 순서로 이동되고, 초점 테두리가 보인다.</li>
+  <li>본문 대비 4.5:1 이상, 큰 글자·배지 3:1 이상 (위 색 표에서 확인).</li>
+  <li>모든 이미지에 alt, 아이콘 버튼에 aria-label, 필터 버튼에 aria-pressed.</li>
+  <li>터치 영역 44px 이상. 모바일에서 가로 스크롤이 생기지 않는다.</li>
+  <li>동작 줄이기 설정에서 애니메이션이 꺼진다.</li>
+  <li>폼: 라벨 연결, 필수 표시, 오류는 글로 표시.</li>
+</ul>
+</section>
+</div></div></main>
+<script src="site.js"></script>
+<script>
+// 색 표와 대비값 계산
+const C=[["--bg","#15110f","페이지 바탕"],["--bg-2","#12151c","카드·패널"],["--bg-3","#191d27","눌림·배지 바탕"],["--line","#262a35","선"],["--ink","#f1ece3","제목·본문"],["--ink-3","#d9d4ca","설명"],["--ink-2","#a9a59c","보조"],["--wood","#d2a46a","포인트"],["--red","#e0312f","예매중·로고"]];
+const lum=h=>{const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:((v+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2]};
+const cr=(a,b)=>{const[x,y]=[lum(a),lum(b)];return ((Math.max(x,y)+.05)/(Math.min(x,y)+.05)).toFixed(1)};
+document.querySelector("#sw").innerHTML=C.map(([n,h,u])=>`<div><i style="background:${h}"></i><p><b>${n} ${h}</b>${u}<br><em>바탕 대비 ${cr(h,"#15110f")} · 카드 대비 ${cr(h,"#1c1714")}</em></p></div>`).join("");
+</script>
+</body>
+</html>

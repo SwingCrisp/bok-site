@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>갤러리 — 비오케이아트센터 (시안 A)</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="site.css">
+<style>
+/* 갤러리: 페이지 제목 → 01 사진으로 보기(큰 사진 + 썸네일) → 02 운영·반입 정보(판 3개) → 03 대관 절차 → 대관 CTA. 모바일 1단. */
+.tabs{display:flex;gap:8px}.tabs a{font-size:14px;padding:8px 16px;border:1px solid var(--line);border-radius:99px}.tabs a[aria-current]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.look{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:16px}
+.look .big{position:relative;aspect-ratio:16/9;background:#000;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.look .big img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .35s;filter:saturate(.9)}
+.look figcaption{padding:12px 16px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-2);position:absolute;left:0;right:0;bottom:0;background:#15110fcc;backdrop-filter:blur(8px)}
+.thumbs{display:grid;gap:8px;align-content:start}
+.thumbs button{border:1px solid var(--line);border-radius:var(--r);padding:0;background:none;overflow:hidden;cursor:pointer;aspect-ratio:16/9;opacity:.6;transition:.2s}
+.thumbs button img{width:100%;height:100%;object-fit:cover}
+.thumbs button[aria-pressed=true]{opacity:1;border-color:var(--wood)}
+@media(max-width:899px){.look{grid-template-columns:1fr}.thumbs{grid-template-columns:repeat(5,1fr);gap:6px}}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:1199px){.g3{grid-template-columns:1fr 1fr}}@media(max-width:899px){.g3{grid-template-columns:1fr}}
+.steps{list-style:none;padding:0;counter-reset:s;display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+.steps li{counter-increment:s;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);padding:16px 14px;font-size:13px;color:var(--ink-3);min-width:0}
+.steps li::before{content:counter(s,decimal-leading-zero);display:block;font-family:var(--serif);font-size:20px;color:var(--wood);margin-bottom:8px}
+.steps b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
+@media(max-width:1199px){.steps{grid-template-columns:repeat(4,1fr)}}@media(max-width:899px){.steps{grid-template-columns:1fr 1fr}}
+.cta{margin-top:var(--sec);background:linear-gradient(90deg,#15110ff2 30%,#15110f99),url(assets/gallery-1.jpg) center/cover;border:1px solid var(--line);border-radius:var(--r);padding:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+@media(max-width:899px){.cta{padding:28px 20px}.cta .btn{width:100%}}
+</style>
+</head>
+<body data-nav="공간·대관">
+<main id="main"><div class="wrap">
+  <nav class="crumb" aria-label="현재 위치"><a href="index.html">홈</a><span>/</span><a href="space-hall.html">공간·대관</a><span>/</span><span>갤러리</span></nav>
+  <div class="page-head"><div><nav class="tabs" aria-label="공간 선택"><a href="space-hall.html">공연장</a><a href="space-gallery.html" aria-current="page">갤러리</a></nav><h1>갤러리</h1></div>
+    <p>146㎡ 오픈형 전시 공간. 개인전과 단체전, 발표회가 이어집니다. 사진으로 먼저 보고, 반입·철수 시간과 절차를 확인하세요.</p></div>
+
+  <section class="sec" id="look">
+    <div class="sec-head"><span class="no">01</span><div class="ti"><p class="eyebrow">둘러보기</p><h2>사진으로 보기</h2></div><div class="act"><span class="badge" title="실제 촬영본 준비 후 제공">360° 준비 중</span></div></div>
+    <div class="look"><figure class="big" id="big"></figure><div class="thumbs" id="thumbs" role="group" aria-label="사진 선택"></div></div>
+    <p class="note" style="margin-top:14px">모두 실제 전시 사진입니다. 촬영 시점의 전시 작품이 포함되어 있으며, 빈 공간 사진과 평면도는 촬영 후 추가합니다.</p>
+  </section>
+
+  <section class="sec" id="info">
+    <div class="sec-head"><span class="no">02</span><div class="ti"><p class="eyebrow">운영 정보</p><h2>운영과 반입</h2></div></div>
+    <div class="g3">
+      <div class="panel"><div class="panel-head"><h3>공간</h3></div><dl class="facts"><dt>면적</dt><dd>146㎡ 오픈형</dd><dt>위치</dt><dd>6층 (공연장과 같은 층)</dd><dt>벽면·조명</dt><dd>확인 필요 — 도면·실측 후 기재</dd><dt>도슨트</dt><dd>단체 관람 시 문의</dd></dl></div>
+      <div class="panel"><div class="panel-head"><h3>관람 시간</h3></div><dl class="facts"><dt>전시</dt><dd>화–일 10:00–19:00</dd><dt>휴관</dt><dd>매주 월요일 · 1월 1일 · 설날·추석 당일</dd><dt>관람료</dt><dd>전시별 안내 (대부분 무료 — 확인 필요)</dd></dl></div>
+      <div class="panel"><div class="panel-head"><h3>반입·철수</h3></div><dl class="facts"><dt>반입·설치</dt><dd>월요일 13:00–18:00</dd><dt>철수</dt><dd>월요일 09:00–12:00</dd><dt>주의</dt><dd>반입과 반출이 같은 날 겹치므로 시간 엄수</dd><dt>문의</dt><dd>갤러리 044-868-3962</dd></dl></div>
+    </div>
+  </section>
+
+  <section class="sec" id="steps">
+    <div class="sec-head"><span class="no">03</span><div class="ti"><p class="eyebrow">대관 절차</p><h2>대관은 이렇게 진행됩니다</h2></div><div class="act"><a class="more" href="#">대관 규약 PDF ↓</a><a class="more" href="#">연간 일정표 ↓</a></div></div>
+    <ol class="steps">
+      <li><b>신청</b>연간 일정표에서 날짜 확인 후 포트폴리오(10컷 이상)·캡션·약력을 이메일로</li>
+      <li><b>심의·승인</b>접수 자료를 자체 심의, 개별 통보</li>
+      <li><b>계약</b>승인 7일 이내 계약, 대관료 30% 계약금 · 잔금은 10일 이내</li>
+      <li><b>실무 협의</b>전시 3주 전 홍보 자료·소개글·부대시설·반입 시간 협의</li>
+      <li><b>반입·설치</b>월요일 13:00–18:00</li>
+      <li><b>전시</b>화–일 10:00–19:00</li>
+      <li><b>철수</b>월요일 09:00–12:00</li>
+    </ol>
+    <p class="note" style="margin-top:16px">현재 홈페이지의 갤러리 대관 안내(7단계)를 그대로 옮겼습니다. 계좌 등 결제 정보는 승인 후 개별 안내로 옮기고 화면에는 싣지 않습니다.</p>
+  </section>
+
+  <div class="cta"><div><p class="eyebrow">대관</p><h2>이 공간에서 전시를 준비하신다면</h2><p style="color:var(--ink-3);margin-top:8px">희망 기간을 남겨 주시면 담당자가 가능 여부를 확인해 연락드립니다.</p></div><p class="btns"><a class="btn solid" href="rental.html">희망일로 대관 문의</a><a class="btn" href="space-hall.html">공연장 보기</a></p></div>
+</div></main>
+<script src="site.js"></script>
+<script>
+const PH=[["assets/gallery-c.jpg","전시 전경 · 벽면과 조명 레일"],["assets/gallery-1.jpg","관람 모습 · 원형 작품 연작"],["assets/gallery-b.jpg","전시 전경"],["assets/gallery-d.jpg","전시 전경"],["assets/gallery-e.jpg","전시 전경"]];
+const big=document.querySelector("#big"),th=document.querySelector("#thumbs");
+PH.forEach(([src,cap],i)=>{big.insertAdjacentHTML("beforeend",`<img src="${src}" alt="갤러리 ${cap}" style="opacity:${i?0:1}" data-i="${i}">`);th.insertAdjacentHTML("beforeend",`<button data-i="${i}" aria-pressed="${!i}" aria-label="${cap}"><img src="${src}" alt=""></button>`)});
+big.insertAdjacentHTML("beforeend",`<figcaption id="cap">${PH[0][1]}</figcaption>`);
+th.onclick=e=>{const b=e.target.closest("button");if(!b)return;const i=b.dataset.i;th.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));big.querySelectorAll("img").forEach(im=>im.style.opacity=im.dataset.i===i?1:0);document.querySelector("#cap").textContent=PH[i][1]};
+</script>
+</body>
+</html>

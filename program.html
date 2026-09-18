@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로그램 상세 — 비오케이아트센터 (시안 A)</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="site.css">
+<style>
+/* PC: 왼쪽 포스터 고정(sticky) + 가운데 본문 + 오른쪽 예매 패널 고정. 모바일: 포스터→요약→본문, 예매는 하단 고정 바. */
+.detail{display:grid;grid-template-columns:340px minmax(0,1fr) 320px;gap:56px;align-items:start;padding-top:28px}
+.poster-col{position:sticky;top:calc(var(--bar) + 24px)}
+.poster-col img{width:100%;border-radius:var(--r);box-shadow:0 40px 80px -40px #000}
+.poster-col .zoom{display:block;text-align:center;font-size:13px;color:var(--ink-2);margin-top:12px}
+.tags{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+h1{font-weight:700;font-size:clamp(28px,3vw,44px);line-height:1.25;margin:14px 0 8px}
+.sub{color:var(--ink-2);font-size:15px;margin-bottom:28px}
+.block{margin-top:48px}
+.block h2{font-size:22px;margin-bottom:16px}
+.disc{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.disc li{background:var(--bg-2);border:1px solid var(--line);padding:14px 16px;border-radius:var(--r);display:flex;justify-content:space-between;gap:12px;font-size:14px}
+.disc b{color:var(--wood);white-space:nowrap}
+.long{position:relative;max-height:720px;overflow:hidden;border-radius:var(--r);background:var(--bg-2)}
+.long img{width:100%;max-width:750px;margin:0 auto}
+.long::after{content:"";position:absolute;inset:auto 0 0 0;height:200px;background:linear-gradient(transparent,var(--bg))}
+.long.open{max-height:none}.long.open::after{display:none}
+.unfold{width:100%;margin-top:12px}
+.buy{position:sticky;top:calc(var(--bar) + 24px);background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.buy .when{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1.2}
+.buy .when small{display:block;font-family:var(--sans);font-size:14px;color:var(--ink-2);font-weight:400;margin-top:6px}
+.buy .btn{width:100%;margin-top:10px}
+.buy hr{border:0;border-top:1px solid var(--line);margin:20px 0}
+.buy p{font-size:13px;color:var(--ink-2)}
+.mbar{display:none}
+@media(max-width:1199px){.detail{grid-template-columns:280px minmax(0,1fr);gap:40px}.buy{position:static;grid-column:2}}
+@media(max-width:899px){
+  .detail{grid-template-columns:1fr;gap:24px;padding-top:16px}
+  .poster-col{position:static;max-width:260px;margin:0 auto}
+  .buy{grid-column:auto;order:3}.buy .btn{display:none}.buy hr{display:none}
+  .disc{grid-template-columns:1fr}
+  .long{max-height:520px}
+  .mbar{display:flex;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));background:#15110ff2;backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .mbar .btn{flex:1;padding:0 10px}
+  body{padding-bottom:80px}
+}
+</style>
+</head>
+<body data-nav="프로그램">
+<main id="main">
+  <div class="wrap">
+    <nav class="crumb" aria-label="현재 위치"><a href="index.html">홈</a><span>/</span><a href="#">프로그램</a><span>/</span><a href="#">공연</a></nav>
+    <div class="detail">
+      <aside class="poster-col">
+        <img src="assets/p705.jpg" alt="지브리와 사랑에 빠지다 콘서트 포스터">
+        <a class="zoom" href="assets/p705.jpg">포스터 크게 보기</a>
+      </aside>
+
+      <article>
+        <div class="tags"><span class="badge" data-s="예매중">예매중</span><span class="pill">공연</span><span class="pill">대관</span><span class="pill">클래식</span></div>
+        <h1>지브리와 사랑에 빠지다 : 지브리 영화음악 콘서트 2026 — 세종</h1>
+        <p class="sub">2026. 10. 3. 토요일 15:00 · 공연장</p>
+        <dl class="facts">
+          <dt>일시</dt><dd>2026. 10. 3. (토) 15:00</dd>
+          <dt>장소</dt><dd>비오케이아트센터 공연장 <a class="more" style="margin-left:8px" href="space-hall.html">공간 보기</a></dd>
+          <dt>관람 등급</dt><dd>5세 이상</dd>
+          <dt>장르</dt><dd>클래식</dd>
+          <dt>문의</dt><dd>스테이지엠 카카오톡 채널</dd>
+        </dl>
+
+        <div class="block"><h2>할인 안내</h2>
+          <ul class="disc">
+            <li><span>어린이·청소년</span><b>10%</b></li>
+            <li><span>15인 이상 단체</span><b>10%</b></li>
+            <li><span>청년문화패스 (본인만)</span><b>20%</b></li>
+            <li><span>문화누리카드 (본인만)</span><b>40%</b></li>
+          </ul>
+        </div>
+
+        <div class="block"><h2>공연 소개</h2>
+          <div class="long" id="long"><img src="assets/d705-1.jpg" alt="공연 상세 안내 이미지. 주요 내용은 위 표와 할인 안내에 글로 적혀 있습니다." loading="lazy"></div>
+          <button class="btn unfold" id="unfold" aria-expanded="false" aria-controls="long">상세 정보 펼치기</button>
+        </div>
+
+        <div class="block">
+          <details class="acc"><summary>유의사항</summary><div class="body"><ul><li>공연 시작 후에는 입장이 제한될 수 있습니다.</li><li>관람 등급 미만의 어린이는 입장할 수 없습니다.</li></ul><p class="note" style="margin-top:12px">시안용 예시 문구입니다. 실제 문안은 센터의 관람 유의사항으로 대체합니다.</p></div></details>
+          <details class="acc"><summary>취소·환불 안내</summary><div class="body"><p>취소와 환불은 예매하신 예매처의 규정을 따릅니다.</p></div></details>
+          <details class="acc"><summary>오시는 길·주차</summary><div class="body"><p>세종특별자치시 국책연구원3로 12 · 문의 1877-4955</p></div></details>
+        </div>
+      </article>
+
+      <aside class="buy" aria-label="예매">
+        <p class="when">10. 3. 토<small>15:00 · 공연장 · 5세 이상</small></p>
+        <hr>
+        <a class="btn red" href="https://tickets.interpark.com/goods/26008522" target="_blank" rel="noopener">NOL티켓에서 예매 ↗</a>
+        <a class="btn" href="#">티켓링크에서 예매 ↗</a>
+        <hr>
+        <p>예매는 외부 예매처에서 진행됩니다. 가격과 잔여 좌석은 예매처에서 확인해 주세요.</p>
+      </aside>
+    </div>
+
+    <section class="sec">
+      <div class="sec-head"><span class="no">더</span><div class="ti"><p class="eyebrow">더 보기</p><h2>다른 프로그램</h2></div><div class="act"><a class="more" href="programs.html">전체 프로그램 →</a></div></div>
+      <div class="rail" id="rail" tabindex="0" aria-label="다른 프로그램, 좌우로 스크롤"></div>
+    </section>
+  </div>
+</main>
+
+<div class="mbar" role="group" aria-label="예매"><a class="btn red" href="https://tickets.interpark.com/goods/26008522" target="_blank" rel="noopener">NOL티켓 예매</a><a class="btn" href="#">티켓링크</a></div>
+
+<script src="data.js"></script>
+<script src="site.js"></script>
+<script>
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+document.querySelector("#rail").innerHTML=window.BOK.programs.filter(p=>p.id!=="p705").map(p=>`
+ <a class="card" href="#"><div class="poster"><img src="${p.img}" alt="${esc(p.title)} 포스터" loading="lazy"><span class="badge" data-s="${p.status}">${p.status}</span></div>
+ <div class="meta">${p.type} · ${p.org}</div><h3>${esc(p.title)}</h3><p>${p.dateText}</p></a>`).join("");
+const L=document.querySelector("#long"),B=document.querySelector("#unfold");
+B.onclick=()=>{const o=L.classList.toggle("open");B.setAttribute("aria-expanded",o);B.textContent=o?"상세 정보 접기":"상세 정보 펼치기"};
+</script>
+</body>
+</html>

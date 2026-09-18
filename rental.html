@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대관 문의 — 비오케이아트센터 (시안 A)</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="site.css">
+<style>
+/* PC: 왼쪽 안내(절차·자료·연락처, sticky) + 오른쪽 문의 양식. 모바일: 제목 → 양식 → 절차(접이식). */
+.top{padding:40px 0 8px}
+.top h1{font-weight:700;font-size:clamp(34px,4vw,60px);line-height:1.15;margin:10px 0 12px}
+.top p{color:var(--ink-3);max-width:36em}
+.lay{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:72px;align-items:start;margin-top:40px}
+.info{position:sticky;top:calc(var(--bar) + 24px)}
+.steps{list-style:none;padding:0;counter-reset:s;border-top:1px solid var(--line)}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--serif);font-size:20px;color:var(--wood);grid-row:span 2}
+.steps b{font-size:16px}.steps span{font-size:14px;color:var(--ink-2)}
+.side-box{margin-top:28px;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.side-box h3{font-size:15px;margin-bottom:8px}
+.side-box a.row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px;min-height:44px;align-items:center}
+.side-box a.row:last-child{border:0}.side-box a.row:hover{color:var(--wood)}
+.side-box p{font-size:14px;color:var(--ink-3)}
+
+form{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);padding:36px}
+fieldset{border:0;padding:0;margin:0 0 32px}
+legend{font-family:var(--serif);font-size:20px;font-weight:600;padding:0;margin-bottom:16px;display:flex;gap:10px;align-items:baseline}
+legend small{font-family:var(--sans);font-size:12px;color:var(--wood);letter-spacing:.14em}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label,.lab{display:block;font-size:14px;color:var(--ink-3);margin-bottom:6px}
+.req::after{content:" *";color:var(--red)}
+input[type=text],input[type=tel],input[type=email],input[type=date],input[type=number],select,textarea{width:100%;min-height:50px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;font-size:16px;color-scheme:dark;transition:border-color .2s}
+textarea{min-height:140px;resize:vertical}
+input:hover,select:hover,textarea:hover{border-color:#3a4050}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--wood);box-shadow:0 0 0 3px #d2a46a33}
+.hint{font-size:12px;color:var(--ink-2);margin-top:6px}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.choice label{position:relative;margin:0;cursor:pointer}
+.choice input{position:absolute;opacity:0}
+.choice span{display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);border-radius:var(--r);padding:16px;background:var(--bg);transition:.2s;min-height:76px}
+.choice span b{font-size:16px;color:var(--ink)}.choice span i{font-style:normal;font-size:13px;color:var(--ink-2)}
+.choice input:checked+span{border-color:var(--wood);background:#d2a46a14}
+.choice input:focus-visible+span{outline:2px solid var(--wood);outline-offset:3px}
+.agree{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--ink-3);margin:0 0 20px}
+.agree input{width:22px;height:22px;accent-color:var(--wood);flex:none;margin-top:1px}
+form .btn{width:100%;min-height:56px;font-size:16px}
+#done{display:none;margin-top:16px}
+@media(max-width:1199px){.lay{gap:40px}}
+@media(max-width:899px){
+  .top{padding-top:24px}.lay{grid-template-columns:1fr;gap:32px;margin-top:24px}
+  .info{position:static;order:2}form{padding:24px 20px;order:1}
+  .g2{grid-template-columns:1fr}.choice{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body data-nav="공간·대관">
+<main id="main">
+  <div class="wrap">
+    <nav class="crumb" aria-label="현재 위치"><a href="index.html">홈</a><span>/</span><a href="space-hall.html">공간·대관</a><span>/</span><span>대관 문의</span></nav>
+    <div class="page-head"><div><p class="eyebrow">대관 문의</p><h1>희망일로 대관 문의</h1></div><p>공간과 희망일을 남겨 주세요. 담당자가 가능 여부를 확인해 연락드립니다. 정식 신청은 안내에 따라 신청서로 진행합니다.</p></div>
+
+    <div class="lay">
+      <aside class="info" id="steps">
+        <div class="sec-head" style="margin-bottom:16px"><span class="no">절차</span><div class="ti"><h2 style="font-size:22px">대관은 이렇게 진행됩니다</h2></div></div>
+        <ol class="steps">
+          <li><b>문의·신청</b><span>희망일 문의 후 대관신청서 제출</span></li>
+          <li><b>심의</b><span>센터 자체 심의</span></li>
+          <li><b>승인·계약</b><span>승인서 발송, 계약금 납부와 계약 체결</span></li>
+          <li><b>진행 협의·잔금</b><span>리허설·스태프 회의, 기본대관료 잔금 납부</span></li>
+          <li><b>공연·정산</b><span>부대설비 사용료 정산, 시설 정리</span></li>
+        </ol>
+        <div class="side-box"><h3>자료</h3>
+          <a class="row" href="#">대관 규약 <span>PDF ↓</span></a><a class="row" href="#">대관료 안내 <span>PDF ↓</span></a><a class="row" href="#">대관신청서 <span>HWP ↓</span></a><a class="row" href="space-hall.html#docs">도면·장비 목록 <span>→</span></a></div>
+        <div class="side-box"><h3>전화가 더 편하시다면</h3><p>공연장 대관 044-868-3960<br>bokartcenter1@naver.com</p></div>
+      </aside>
+
+      <form id="f" novalidate>
+        <fieldset><legend><small>01</small>어떤 공간인가요</legend>
+          <div class="choice" role="radiogroup" aria-label="공간">
+            <label><input type="radio" name="space" value="hall" checked><span><b>공연장</b><i>220석 · 공연·행사</i></span></label>
+            <label><input type="radio" name="space" value="gallery"><span><b>갤러리</b><i>146㎡ · 전시</i></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset><legend><small>02</small>언제 사용하시나요</legend>
+          <div class="g2">
+            <div><label class="req" for="d1">1지망 희망일</label><input id="d1" type="date" required></div>
+            <div><label for="d2">2지망 희망일</label><input id="d2" type="date"></div>
+            <div><label for="days">사용 일수</label><select id="days"><option>1일</option><option>2일</option><option>3일 이상</option><option>1주 이상 (전시)</option></select></div>
+            <div><label for="setup">준비·리허설 필요</label><select id="setup"><option>당일 준비</option><option>전날부터 필요</option><option>미정</option></select></div>
+          </div>
+          <p class="hint">날짜가 정해지지 않았다면 가까운 날짜를 넣고 아래 내용에 적어 주세요.</p>
+        </fieldset>
+
+        <fieldset><legend><small>03</small>어떤 행사인가요</legend>
+          <div class="g2">
+            <div><label class="req" for="type">행사 유형</label><select id="type" required><option value="">선택</option><option>클래식·연주회</option><option>뮤지컬·연극</option><option>대중음악</option><option>강연·컨퍼런스</option><option>전시</option><option>기타</option></select></div>
+            <div><label for="ppl">예상 인원</label><input id="ppl" type="number" min="1" inputmode="numeric" placeholder="예: 150"></div>
+          </div>
+          <div style="margin-top:16px"><label for="msg">행사 내용과 요청 사항</label><textarea id="msg" placeholder="행사 개요, 필요한 장비, 현장 청음·답사 희망 여부 등"></textarea></div>
+        </fieldset>
+
+        <fieldset><legend><small>04</small>연락받으실 분</legend>
+          <div class="g2">
+            <div><label for="org">단체명</label><input id="org" type="text" autocomplete="organization"></div>
+            <div><label class="req" for="nm">담당자 이름</label><input id="nm" type="text" autocomplete="name" required></div>
+            <div><label class="req" for="tel">연락처</label><input id="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="010-0000-0000" required></div>
+            <div><label class="req" for="em">이메일</label><input id="em" type="email" autocomplete="email" required></div>
+          </div>
+        </fieldset>
+
+        <label class="agree"><input type="checkbox" id="ok" required><span>문의 응대를 위한 개인정보(이름·연락처·이메일) 수집·이용에 동의합니다. 보관 기간과 처리 방침은 <a href="#" style="text-decoration:underline">개인정보처리방침</a>을 따릅니다.</span></label>
+        <button class="btn solid" type="submit">문의 보내기</button>
+        <p class="note" id="done" role="status">시안 화면입니다. 실제 사이트에서는 담당자 메일과 접수 목록으로 전달됩니다.</p>
+      </form>
+    </div>
+  </div>
+</main>
+<script src="site.js"></script>
+<script>
+const f=document.querySelector("#f");
+f.addEventListener("submit",e=>{e.preventDefault();
+  const bad=[...f.querySelectorAll("[required]")].find(i=>!i.checkValidity());
+  if(bad){bad.focus();bad.reportValidity();return}
+  document.querySelector("#done").style.display="block"});
+</script>
+</body>
+</html>

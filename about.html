@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>센터 소개 — 비오케이아트센터 (시안 A)</title>
+<link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="site.css">
+<style>
+/* 센터 소개: 사진 띠 → 01 소개(숫자 4개 + 문단) → 02 인사말 → 03 공간 한눈에 → 04 부서별 연락처 → 05 CI. 모바일 1단. */
+.lead-img{position:relative;margin-top:28px}
+.lead-img img{width:100%;aspect-ratio:21/9;object-fit:cover;border-radius:var(--r);filter:saturate(.85) sepia(.12) contrast(1.04) brightness(.92)}
+.lead-img blockquote{position:absolute;left:40px;bottom:36px;font-family:var(--serif);font-size:clamp(24px,3vw,44px);font-weight:600;line-height:1.3;color:var(--ink);text-shadow:0 2px 24px #000,0 0 60px #000;border:0;padding:0;margin:0}
+.lead-img::after{content:"";position:absolute;inset:0;border-radius:var(--r);background:linear-gradient(180deg,transparent 45%,#15110fd9 100%)}
+.lead-img blockquote{z-index:1}
+@media(max-width:899px){.lead-img img{aspect-ratio:4/3}.lead-img blockquote{left:20px;bottom:20px}}
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.big-q{font-family:var(--serif);font-size:clamp(24px,2.4vw,34px);font-weight:600;line-height:1.5;color:var(--ink)}
+.intro p{color:var(--ink-3);font-size:16px;line-height:1.8}
+@media(max-width:899px){.intro{grid-template-columns:1fr}}
+.greet{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px;align-items:start}
+.greet blockquote{font-family:var(--serif);font-size:clamp(22px,2.2vw,30px);font-weight:600;line-height:1.5;color:var(--ink);border-left:2px solid var(--wood);padding-left:24px;margin-bottom:24px}
+.greet p{color:var(--ink-3);line-height:1.8;font-size:15px}.greet p+p{margin-top:12px}
+.greet .sign{margin-top:20px;font-size:14px;color:var(--ink-2)}.greet .sign b{color:var(--ink);font-family:var(--serif);font-size:18px;font-weight:600;display:block}
+@media(max-width:899px){.greet{grid-template-columns:1fr}}
+.spaces2{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.spaces2 a.panel{display:grid;gap:10px;padding:0;overflow:hidden}.spaces2 a.panel:hover{border-color:var(--wood)}
+.spaces2 img{width:100%;aspect-ratio:16/9;object-fit:cover;filter:saturate(.82) contrast(1.04) brightness(.96)}
+.spaces2 .t{padding:0 20px 20px}.spaces2 h3{font-family:var(--serif);font-size:20px;font-weight:600}.spaces2 p{font-size:14px;color:var(--ink-2);margin-top:4px}
+@media(max-width:899px){.spaces2{grid-template-columns:1fr}}
+.contacts{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.contacts .panel h3{font-size:15px;margin-bottom:4px}.contacts .panel a{font-family:var(--serif);font-size:22px;font-weight:600;display:block}.contacts .panel span{font-size:13px;color:var(--ink-2)}
+@media(max-width:1199px){.contacts{grid-template-columns:1fr 1fr}}@media(max-width:899px){.contacts{grid-template-columns:1fr}}
+.ci{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ci figure{background:#fff;border-radius:var(--r);padding:20px;display:grid;place-items:center;min-height:160px}
+.ci figure.dark{background:var(--bg-3)}
+.ci figcaption{font-size:13px;color:var(--ink-2);margin-top:8px}
+@media(max-width:899px){.ci{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-nav="센터 소개">
+<main id="main"><div class="wrap">
+  <nav class="crumb" aria-label="현재 위치"><a href="index.html">홈</a><span>/</span><span>센터 소개</span></nav>
+  <div class="page-head"><div><p class="eyebrow">소개</p><h1>비오케이아트센터</h1></div><p>공연장과 갤러리가 한 층에 있는, 세종의 복합문화공간입니다.</p></div>
+  <div class="lead-img"><img src="assets/hall-side.jpg" alt="무대 옆에서 본 공연장 객석과 목재 벽면"><blockquote>복을 나누는 공간.<br>무대와 흰 벽이 한 층에.</blockquote></div>
+
+  <section class="sec" id="intro">
+    <div class="sec-head"><span class="no">01</span><div class="ti"><p class="eyebrow">소개</p><h2>무대와 흰 벽이 이웃한 곳</h2></div></div>
+    <div class="intro">
+      <div><p class="big-q">복(BOK)의 근원이 되는 기업. 문화예술로 예술가와 관객을 축복하고, 세종에 문화예술의 꽃을 피우는 곳.</p></div>
+      <div><p>비오케이아트센터는 공연장과 갤러리가 한 층에 있는 복합문화공간입니다. 클래식과 뮤지컬, 강연이 오르는 무대와, 개인전과 단체전이 이어지는 흰 벽이 서로 이웃해 있습니다.</p><p style="margin-top:12px">소외된 곳, 연약한 곳에 눈을 두고 문화 향유와 예술 교육의 거점이 되고자 합니다. 객석 수와 면적, 무대 제원 같은 자세한 정보는 공간·대관 페이지에서 확인하실 수 있습니다.</p><p class="btns" style="margin-top:20px"><a class="btn sm" href="space-hall.html">공연장 보기</a><a class="btn sm" href="space-gallery.html">갤러리 보기</a></p></div>
+    </div>
+  </section>
+
+  <section class="sec" id="greeting">
+    <div class="sec-head"><span class="no">02</span><div class="ti"><p class="eyebrow">인사말</p><h2>인사말</h2></div></div>
+    <div class="greet">
+      <div><blockquote>복의 근원이 되는 기업, 비오케이에서 함께 꿈을 키워나가고 그 영광의 대열에 함께 서있게 되길 바랍니다.</blockquote>
+        <p>복(BOK)의 근원이 되는 기업, 비오케이아트센터는 문화예술을 통해 예술가와 관객을 축복하고 행복을 전하는 복합문화공간입니다. 또한 세종시에 문화예술의 꽃을 피우고자 노력하고 있습니다.</p>
+        <p>공연과 전시뿐만 아니라 미술·음악 아카데미 사업을 통해 미래를 확장해 나가고 모두의 꿈에 복을 실어 후대에까지 전하고자 합니다. 소외된 곳, 연약한 곳에 눈을 두고 문화향유와 예술교육의 거점으로써 세종시의 문화예술 발전을 선도하겠습니다.</p>
+        <p>여러분의 따뜻한 관심과 발걸음으로 함께 복을 나누는 공간이 되기를 기대합니다. 감사합니다.</p>
+        <p class="sign">(주)비오케이 대표이사<b>이규순</b></p></div>
+      <div class="panel"><div class="panel-head"><h3>기관 정보</h3></div><dl class="facts"><dt>운영</dt><dd>(주)비오케이아트</dd><dt>대표</dt><dd>이규순</dd><dt>주소</dt><dd>세종특별자치시 국책연구원3로 12, 6층 601호</dd><dt>대표번호</dt><dd>1877-4955</dd><dt>이메일</dt><dd>bokartcenter1@naver.com</dd></dl></div>
+    </div>
+  </section>
+
+  <section class="sec" id="spaces">
+    <div class="sec-head"><span class="no">03</span><div class="ti"><p class="eyebrow">공간</p><h2>공간</h2></div><div class="act"><a class="more" href="rental.html">대관 문의 →</a></div></div>
+    <div class="spaces2">
+      <a class="panel" href="space-hall.html"><img src="assets/hall-seats.jpg" alt=""><div class="t"><h3>공연장</h3><p>220석 · VICELLO 음장가변 · 클래식부터 뮤지컬·컨퍼런스</p></div></a>
+      <a class="panel" href="space-gallery.html"><img src="assets/gallery-1.jpg" alt=""><div class="t"><h3>갤러리</h3><p>146㎡ 오픈형 · 화–일 10:00–19:00</p></div></a>
+      <a class="panel" href="visit.html#floors"><img src="assets/hall-e.jpg" alt=""><div class="t"><h3>6층에서</h3><p>공연장 · 갤러리 · 사무실 601호 — 층별 안내</p></div></a>
+    </div>
+  </section>
+
+  <section class="sec" id="contact">
+    <div class="sec-head"><span class="no">04</span><div class="ti"><p class="eyebrow">연락처</p><h2>부서별 연락처</h2></div></div>
+    <div class="contacts">
+      <div class="panel"><h3>사무실</h3><a href="tel:0448683956">044-868-3956</a><span>대표 1877-4955 · 팩스 044-868-3957</span></div>
+      <div class="panel"><h3>공연장 대관</h3><a href="tel:0448683960">044-868-3960</a><span>대관·기술 문의</span></div>
+      <div class="panel"><h3>갤러리</h3><a href="tel:0448683962">044-868-3962</a><span>전시 대관·도슨트</span></div>
+      <div class="panel"><h3>이메일</h3><a href="mailto:bokartcenter1@naver.com" style="font-size:16px;font-family:var(--sans);font-weight:500">bokartcenter1@naver.com</a><span>대관 신청서 접수</span></div>
+    </div>
+  </section>
+
+  <section class="sec" id="ci">
+    <div class="sec-head"><span class="no">05</span><div class="ti"><p class="eyebrow">CI</p><h2>CI</h2></div><div class="act"><a class="more" href="#">AI 파일 내려받기 ↓</a></div></div>
+    <div class="ci"><figure><img src="assets/ci-1.png" alt="기본 로고"><figcaption>기본 로고</figcaption></figure><figure class="dark"><img src="assets/ci-2.png" alt="어두운 배경용 로고"><figcaption>어두운 배경용 (색 임의 변경 금지)</figcaption></figure><figure><img src="assets/ci-3.png" alt="사용 금지 예시"><figcaption>사용 금지 예시</figcaption></figure></div>
+    <p class="note" style="margin-top:14px">현재 홈페이지 CI 안내 이미지입니다. 새 사이트의 상단 로고는 이 CI를 기준으로 다시 정리합니다(지금 시안의 글자 로고는 임시).</p>
+  </section>
+</div></main>
+<script src="site.js"></script>
+</body></html>
