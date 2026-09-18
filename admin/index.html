@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="admin.css">
+<title>대시보드 — 관리자</title>
+</head>
+<body><div class="app" id="app"></div>
+<script src="../data.js"></script><script src="admin.js"></script>
+<script>
+const A=window.ADMIN,db=A.db,esc=A.esc,T=A.TODAY;
+const st=p=>A.status(p);
+const soon=db.programs.filter(p=>!p.draft&&p.start>=T).sort((a,b)=>a.start<b.start?-1:1).slice(0,5);
+const ending=db.programs.filter(p=>{const s=st(p);return s!=="종료"&&(p.end||p.start)>=T&&(p.end||p.start)<="2026-09-30"});
+const drafts=db.programs.filter(p=>p.draft),sched=db.programs.filter(p=>st(p)==="예약"),newQ=db.inquiries.filter(q=>q.state==="새 문의");
+document.getElementById("app").innerHTML=A.nav("대시보드")+`<main class="main">
+  <div class="top"><div><div class="crumb">${T} 기준</div><h1>오늘 할 일</h1></div><div class="acts"><a class="btn accent" href="program-edit.html?new=1">+ 새 프로그램</a><a class="btn" href="notices.html?new=1">+ 새 공지</a></div></div>
+  <div class="grid g4" style="margin-bottom:16px">
+    <div class="card stat ${newQ.length?"warn":""}"><b>${newQ.length}</b><span>새 대관 문의</span></div>
+    <div class="card stat"><b>${drafts.length}</b><span>임시 저장 중</span></div>
+    <div class="card stat"><b>${sched.length}</b><span>예약 게시 대기</span></div>
+    <div class="card stat"><b>${ending.length}</b><span>이달 안에 끝나는 프로그램 (자동 종료)</span></div>
+  </div>
+  <div class="grid g2">
+    <div class="card"><h2>곧 열리는 프로그램 <a href="programs.html">전체 →</a></h2><div class="tw"><table><tr><th>일시</th><th>제목</th><th>상태</th></tr>
+      ${soon.map(p=>`<tr><td>${p.start}${p.end?" – "+p.end:""}</td><td><a href="program-edit.html?id=${p.id}"><span class="t">${esc(p.title)}</span><br><span class="s">${p.type} · ${p.venue} · ${p.org||"—"}</span></a></td><td><span class="st" data-s="${st(p)}">${st(p)}</span></td></tr>`).join("")}</table></div></div>
+    <div class="card"><h2>새 대관 문의 <a href="inquiries.html">전체 →</a></h2>
+      ${newQ.length?`<div class="list">${newQ.map(q=>`<a href="inquiries.html#${q.id}"><div><b>${q.space}</b> · ${q.d1}${q.d2?" / "+q.d2:""} · ${esc(q.type)}<br><span class="s">${esc(q.org||q.name)} · ${q.at}</span></div><span class="st" data-s="예매중">새 문의</span></a>`).join("")}</div>`:'<p class="note">새 문의가 없습니다.</p>'}
+      <h2 style="margin-top:20px">자동으로 처리되는 것</h2>
+      <ul style="padding-left:18px;font-size:14px;color:var(--ink-3);line-height:1.8"><li>종료일이 지나면 <b>종료</b>로 바뀌고 지난 프로그램으로 이동합니다.</li><li>예매 시작일이 되면 <b>예매중</b>으로 바뀝니다.</li><li>예약 게시 시각이 되면 사이트에 나타납니다. (하루 3회 갱신 + 게시 즉시 갱신)</li><li>매일 새벽 전체 데이터가 백업됩니다.</li></ul></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h2>최근 수정</h2><div class="tw"><table><tr><th>수정일</th><th>제목</th><th>상태</th><th></th></tr>
+    ${[...db.programs].sort((a,b)=>a.updated<b.updated?1:-1).slice(0,6).map(p=>`<tr><td>${p.updated}</td><td><a href="program-edit.html?id=${p.id}" class="t">${esc(p.title)}</a></td><td><span class="st" data-s="${st(p)}">${st(p)}</span></td><td style="text-align:right"><a class="btn sm" href="program-edit.html?id=${p.id}">편집</a></td></tr>`).join("")}</table></div></div>
+</main>`;
+</script></body></html>

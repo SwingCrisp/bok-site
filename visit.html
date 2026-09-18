@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>방문 안내 — 비오케이아트센터 (시안 A)</title>
-<link rel="stylesheet" href="fonts.css?v=202609181448">
-<link rel="stylesheet" href="site.css?v=202609181448">
+<link rel="stylesheet" href="fonts.css?v=202609181455">
+<link rel="stylesheet" href="site.css?v=202609181455">
 <style>
 /* 방문 안내: 페이지 제목 → 01 오시는 길(지도 자리 + 주소·대중교통) → 02 운영 시간 → 03 접근성 → 04 층별 안내 → 05 관람 안내(접이식). PC 2단, 모바일 1단. */
 .map{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px}
@@ -90,7 +90,7 @@
     </div>
   </section>
 </div></main>
-<script src="site.js?v=202609181448"></script>
+<script src="site.js?v=202609181455"></script>
 <script>
 const F=[["1F","식당·베이커리·편의점 · 주차장 입구","floor-1f"],["2F","식당","floor-2f"],["3F","헬스·헤어·쿠킹클래스","floor-3f"],["4F","꾸메문고·카페","floor-4f"],["5F","글로벌 선진학교","floor-5f"],["6F","공연장 · 갤러리 · 사무실","floor-6f"]];
 const fl=document.querySelector("#flist");fl.innerHTML=F.map(([n,d,f],i)=>`<button data-f="${f}" data-n="${n}" aria-pressed="${i===0}"><b>${n}</b><span>${d}</span></button>`).join("");

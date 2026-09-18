@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="admin.css">
+<title>설정 — 관리자</title>
+</head>
+<body><div class="app" id="app"></div>
+<script src="../data.js"></script><script src="admin.js"></script>
+<script>
+const A=window.ADMIN,db=A.db,s=db.settings,esc=A.esc;
+document.getElementById("app").innerHTML=A.nav("설정")+`<main class="main">
+  <div class="top"><div><div class="crumb">설정</div><h1>사이트 설정</h1></div><div class="acts"><button class="btn primary" id="save">저장</button></div></div>
+  <div class="grid g2">
+    <div class="card"><h2>연락처·운영</h2>
+      <div class="f"><label>대표번호</label><input id="phone" value="${esc(s.phone)}"></div><div class="row2"><div class="f"><label>공연장 대관</label><input id="hallPhone" value="${esc(s.hallPhone)}"></div><div class="f"><label>갤러리</label><input id="galleryPhone" value="${esc(s.galleryPhone)}"></div></div>
+      <div class="f"><label>이메일</label><input id="email" value="${esc(s.email)}"></div><div class="f"><label>갤러리 관람 시간</label><input id="galleryHours" value="${esc(s.galleryHours)}"></div></div>
+    <div class="card"><h2>상단 알림 띠</h2><div class="f"><label>문구 <small>비우면 표시되지 않습니다</small></label><input id="banner" value="${esc(s.banner)}" placeholder="예: 추석 연휴 휴관 안내 (9.24–9.26)"></div>
+      <h2 style="margin-top:20px">메뉴</h2><div class="list"><a href="#">프로그램 <span class="s">/programs</span></a><a href="#">방문 안내 <span class="s">/visit</span></a><a href="#">공간·대관 <span class="s">/spaces</span></a><a href="#">소식 <span class="s">/notices</span></a><a href="#">센터 소개 <span class="s">/about</span></a></div><button class="btn sm" style="margin-top:10px">+ 메뉴 추가</button>
+      <div class="hint" style="margin-top:8px">메뉴와 범용 페이지를 여기서 추가할 수 있어, 아카데미나 새 사업이 생겨도 코드 수정 없이 늘릴 수 있습니다.</div></div>
+    <div class="card"><h2>백업·내보내기</h2><div class="kv"><dt>자동 백업</dt><dd>매일 04:00 · 마지막 성공 2026-09-18 04:00 (시안 값)</dd><dt>보관</dt><dd>최근 30일 + 매월 1일분</dd></div><div class="acts" style="margin-top:12px"><button class="btn sm">전체 데이터 내보내기 (JSON)</button><button class="btn sm">프로그램 CSV</button><button class="btn sm">문의 CSV</button></div></div>
+    <div class="card"><h2>사용자</h2><div class="list"><a href="#">관리자 · admin@bokartcenter <span class="s">모든 권한</span></a><a href="#">갤러리 담당 · staff@bokartcenter <span class="s">편집자</span></a><a href="#">공연장 담당 · hall@bokartcenter <span class="s">편집자</span></a></div><div class="hint" style="margin-top:8px">권한은 관리자/편집자 2단계. 로그인은 구글 계정으로, 비밀번호를 따로 만들지 않습니다.</div></div>
+  </div></main>`;
+document.getElementById("save").onclick=()=>{["phone","hallPhone","galleryPhone","email","galleryHours","banner"].forEach(k=>s[k]=document.getElementById(k).value);A.save();A.toast("저장했습니다")};
+</script></body></html>

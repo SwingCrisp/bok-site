@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="admin.css">
+<title>프로그램 편집 — 관리자</title>
+</head>
+<body><div class="app" id="app"></div>
+<script src="../data.js"></script><script src="admin.js"></script>
+<script>
+const A=window.ADMIN,db=A.db,esc=A.esc,Q=new URLSearchParams(location.search);
+let p=Q.get("new")?{id:A.uid("p"),type:"공연",org:"대관",title:"",venue:"공연장",start:"",end:"",time:"",rating:"전체 관람가",price:"",poster:"",host:"",contact:"",booking:[],bookingOpenAt:"",manualStatus:"",publishAt:"",draft:true,body:"",updated:A.TODAY,isNew:true}:db.programs.find(x=>x.id===Q.get("id"));
+if(!p){location.href="programs.html"}
+const F=(k,label,input,hint="")=>`<div class="f"><label for="${k}">${label}</label>${input}${hint?`<div class="hint">${hint}</div>`:""}</div>`;
+const I=(k,type="text",extra="")=>`<input id="${k}" type="${type}" value="${esc(p[k]||"")}" ${extra}>`;
+const S=(k,opts)=>`<select id="${k}">${opts.map(o=>`<option ${p[k]===o?"selected":""}>${o}</option>`).join("")}</select>`;
+function render(){
+  const s=A.status(p);
+  document.getElementById("app").innerHTML=A.nav("프로그램")+`<main class="main">
+  <div class="top"><div><div class="crumb"><a href="programs.html">프로그램</a> / ${p.isNew?"새 프로그램":"편집"}</div><h1>${esc(p.title)||"새 프로그램"}</h1></div>
+    <div class="acts"><button class="btn" id="save-draft">임시 저장</button><a class="btn" id="preview" href="../program.html" target="_blank">미리보기 ↗</a><button class="btn" id="schedule">예약 게시…</button><button class="btn primary" id="publish">게시</button></div></div>
+  <form class="edit" id="f" novalidate>
+    <div>
+      <div class="card"><fieldset><legend>기본 정보</legend>
+        ${F("title",'<span class="req">제목</span>',I("title","text",'required placeholder="예: 세종 유스 실내악 페스티벌"'),"[대관]·[기획] 같은 말머리는 넣지 않습니다. 아래 구분에서 고릅니다.")}
+        <div class="row2">${F("type",'<span class="req">유형</span>',S("type",["공연","전시","행사"]))}${F("org","구분",S("org",["기획","대관","공동"]))}</div>
+        <div class="row2">${F("venue",'<span class="req">장소</span>',S("venue",["공연장","갤러리","기타"]))}${F("rating","관람 등급",I("rating","text",'placeholder="전체 관람가 / 7세 이상"'))}</div>
+      </fieldset></div>
+      <div class="card" style="margin-top:16px"><fieldset><legend>일정</legend>
+        <div class="row2">${F("start",'<span class="req">시작일</span>',I("start","date","required"))}${F("end","종료일 <small>하루짜리면 비워 둡니다</small>",I("end","date"))}</div>
+        <div class="row2">${F("time","시각",I("time","text",'placeholder="16:00 · 회차가 여럿이면 쉼표로"'))}${F("price","가격 문구",I("price","text",'placeholder="전석 30,000원 / 무료"'),'"무료"가 들어가면 무료 배지가 붙습니다.')}</div>
+      </fieldset></div>
+      <div class="card" style="margin-top:16px"><fieldset><legend>예매·접수</legend>
+        <div class="f"><label>예매처 <small>여러 곳이면 줄을 추가합니다</small></label><div class="links" id="links">
+          ${p.booking.map((b,i)=>`<div class="li"><input placeholder="예매처 이름" value="${esc(b.label)}" data-bl="${i}"><input placeholder="https://" value="${esc(b.url)}" data-bu="${i}"><button type="button" class="btn sm" data-del="${i}">삭제</button></div>`).join("")}
+          <div><button type="button" class="btn sm" id="add-link">+ 예매처 추가</button></div></div></div>
+        <div class="row2">${F("bookingOpenAt","예매 시작",I("bookingOpenAt","datetime-local"),"이 시각부터 자동으로 '예매중'이 됩니다.")}${F("manualStatus","직접 지정 상태",S("manualStatus",["","매진","취소","연기"]),"평소에는 비워 둡니다.")}</div>
+      </fieldset></div>
+      <div class="card" style="margin-top:16px"><fieldset><legend>소개</legend>
+        ${F("body","소개 글",`<textarea id="body" placeholder="공연 소개, 출연진, 프로그램. 이미지에만 있는 정보는 반드시 글로도 적어 주세요.">${esc(p.body)}</textarea>`)}
+        <div class="row2">${F("host","주최·주관",I("host"))}${F("contact","문의",I("contact","text",'placeholder="전화 또는 카카오톡 채널"'))}</div>
+      </fieldset></div>
+    </div>
+    <aside class="side-panel">
+      <div class="card status-box"><div class="big">사이트에 보이는 상태 (자동)</div><span class="st" data-s="${s}">${s}</span>
+        <div class="hint">${p.draft?"임시 저장 상태라 사이트에 나오지 않습니다.":p.publishAt&&p.publishAt.slice(0,10)>A.TODAY?"예약 게시: "+p.publishAt.replace("T"," ")+"에 공개됩니다.":"공개 중입니다. 종료일이 지나면 자동으로 지난 프로그램으로 이동합니다."}</div>
+        <div class="kv" style="margin-top:6px"><dt>마지막 수정</dt><dd>${p.updated}</dd><dt>주소</dt><dd>/programs/${p.id}</dd></div></div>
+      <div class="card"><h2>포스터 <span class="hint">세로 2:3 · 900px 이상</span></h2>
+        <div class="poster-drop">${p.poster?`<img src="${p.poster}" alt="">`:"<div style='width:120px;aspect-ratio:1/1.414;border:1px solid var(--line);border-radius:4px;display:grid;place-items:center'>없음</div>"}<span>여기에 끌어다 놓거나</span><button type="button" class="btn sm" id="pick">파일 선택</button><input type="file" id="file" accept="image/*" hidden></div>
+        <div class="hint" style="margin-top:8px">업로드하면 자동으로 크기를 줄이고 WebP로 바꿉니다(시안에서는 미리보기만).</div></div>
+      <div class="card"><h2>상세 이미지</h2><div class="hint">긴 배너 이미지를 올릴 수 있습니다. 사이트에서는 접힌 채로 보이고 "펼치기"로 엽니다. 핵심 정보는 위 소개 글에도 적어 주세요.</div><button type="button" class="btn sm" style="margin-top:10px">+ 이미지 추가</button></div>
+      ${p.isNew?"":`<div class="card"><h2>이 프로그램으로</h2><div class="acts"><button type="button" class="btn sm" id="dup">복제해서 새로 만들기</button><button type="button" class="btn sm danger" id="del">삭제</button></div></div>`}
+    </aside>
+  </form></main>`;
+  bind();
+}
+function collect(){["title","type","org","venue","rating","start","end","time","price","bookingOpenAt","manualStatus","body","host","contact"].forEach(k=>{const el=document.getElementById(k);if(el)p[k]=el.value});
+  p.booking=[...document.querySelectorAll("[data-bl]")].map((el,i)=>({label:el.value,url:document.querySelector(`[data-bu="${i}"]`).value})).filter(b=>b.label||b.url)}
+function validate(){const e=[];if(!p.title.trim())e.push("제목");if(!p.start)e.push("시작일");if(p.end&&p.end<p.start)e.push("종료일이 시작일보다 빠릅니다");if(p.booking.some(b=>b.url&&!/^https?:\/\//.test(b.url)))e.push("예매 주소는 https://로 시작");return e}
+function persist(){p.updated=A.TODAY;if(p.isNew){delete p.isNew;db.programs.unshift(p)}A.save()}
+function bind(){
+  document.getElementById("save-draft").onclick=()=>{collect();p.draft=true;persist();A.toast("임시 저장했습니다");render()};
+  document.getElementById("publish").onclick=()=>{collect();const e=validate();if(e.length){A.toast("확인 필요: "+e.join(", "));return}p.draft=false;p.publishAt="";persist();A.toast("게시했습니다 — 몇 분 안에 사이트에 반영됩니다");render()};
+  document.getElementById("schedule").onclick=()=>{collect();const e=validate();if(e.length){A.toast("확인 필요: "+e.join(", "));return}const v=prompt("공개할 날짜와 시각 (예: 2026-10-01 10:00)",(p.publishAt||"").replace("T"," "));if(!v)return;p.publishAt=v.trim().replace(" ","T");p.draft=false;persist();A.toast("예약했습니다: "+v);render()};
+  document.getElementById("add-link").onclick=()=>{collect();p.booking.push({label:"",url:""});render()};
+  document.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{collect();p.booking.splice(+b.dataset.del,1);render()});
+  document.getElementById("pick").onclick=()=>document.getElementById("file").click();
+  document.getElementById("file").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{p.poster=r.result;render();A.toast("포스터를 넣었습니다 (시안: 브라우저에만 저장)")};r.readAsDataURL(f)};
+  const d=document.getElementById("dup");if(d)d.onclick=()=>{collect();const c={...p,id:A.uid("p"),title:p.title+" (복사)",draft:true,publishAt:"",updated:A.TODAY,booking:p.booking.map(x=>({...x}))};db.programs.unshift(c);A.save();location.href="program-edit.html?id="+c.id};
+  const x=document.getElementById("del");if(x)x.onclick=()=>{if(confirm("정말 삭제할까요? 지난 프로그램 기록은 남기는 편이 좋습니다.")){db.programs=db.programs.filter(q=>q.id!==p.id);A.save();location.href="programs.html"}};
+  document.querySelectorAll("#f input,#f select,#f textarea").forEach(el=>el.addEventListener("change",()=>{collect();const s=A.status(p);const b=document.querySelector(".status-box .st");b.dataset.s=s;b.textContent=s}));
+}
+render();
+</script></body></html>

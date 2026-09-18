@@ -1,0 +1,102 @@
+/* 관리자 화면 (직원용) — 밝은 작업용 화면. 공개 사이트와 같은 글꼴·호박색만 공유한다.
+   실제 구현은 Sanity Studio이며, 이 화면은 필드·흐름·용어를 확정하기 위한 시안 + 동작 시연(브라우저 저장). */
+:root{--bg:#f6f2ec;--paper:#fffdf9;--ink:#1d1a17;--ink-2:#6f675e;--ink-3:#3f3933;--line:#e4dccf;--wood:#b98443;--wood-2:#f3e6d2;--red:#d0342c;--green:#2f7d4f;--blue:#2b5f9e;
+  --sans:"Pretendard Variable",Pretendard,system-ui,sans-serif;--serif:"Maru Buri",serif;--r:8px}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;word-break:keep-all}
+a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--wood);outline-offset:2px}
+[hidden]{display:none!important}
+.app{display:grid;grid-template-columns:232px 1fr;min-height:100vh}
+/* 왼쪽 메뉴 */
+.side{background:#1d1a17;color:#efe7da;padding:20px 14px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh}
+.side .logo{font-weight:700;letter-spacing:.04em;padding:8px 10px 18px;display:flex;align-items:baseline;gap:6px}
+.side .logo b{color:#e0312f;font-size:18px}.side .logo span{font-family:var(--serif);font-size:13px;letter-spacing:.12em;color:#c9beac}
+.side .logo small{display:block;font-size:11px;color:#8f8579;letter-spacing:0;margin-top:2px;font-family:var(--sans)}
+.side a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:6px;color:#d6cbb9;font-size:14px}
+.side a:hover{background:#ffffff12}.side a[aria-current]{background:#ffffff1a;color:#fff}
+.side a .n{margin-left:auto;font-size:11px;background:var(--wood);color:#1d1a17;border-radius:99px;padding:1px 7px;font-weight:700}
+.side .sep{height:1px;background:#ffffff14;margin:8px 4px}
+.side .me{margin-top:auto;font-size:12px;color:#8f8579;padding:10px 12px;line-height:1.5}
+.side .me b{display:block;color:#efe7da;font-weight:600}
+/* 본문 */
+.main{padding:28px 36px 60px;min-width:0}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.top h1{font-family:var(--serif);font-size:26px;font-weight:600}
+.top .crumb{font-size:13px;color:var(--ink-2);margin-bottom:4px}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 14px;border:1px solid var(--line);border-radius:6px;background:var(--paper);cursor:pointer;font-size:14px;font-weight:500}
+.btn:hover{border-color:var(--wood)}
+.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}.btn.primary:hover{background:#000}
+.btn.accent{background:var(--wood);border-color:var(--wood);color:#fff}.btn.accent:hover{background:#a3722f}
+.btn.danger{color:var(--red)}.btn.sm{min-height:32px;padding:0 10px;font-size:13px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.card h2{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.card h2 a{font-size:13px;color:var(--wood);font-weight:500}
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1fr 1fr}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1100px){.g3,.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:899px){.app{grid-template-columns:1fr}.side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;padding:12px}.side .logo{width:100%;padding-bottom:8px}.side .me,.side .sep{display:none}.main{padding:18px 16px 40px}.g2,.g3,.g4{grid-template-columns:1fr}}
+/* 요약 숫자 */
+.stat{display:grid;gap:4px}.stat b{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.1}.stat span{font-size:13px;color:var(--ink-2)}
+.stat.warn b{color:var(--red)}
+/* 표 */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:12px;color:var(--ink-2);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:hover td{background:#faf6ee}
+td .t{font-weight:600}td .s{font-size:12px;color:var(--ink-2)}
+td img.th{width:36px;aspect-ratio:1/1.414;object-fit:cover;border-radius:3px;border:1px solid var(--line)}
+.tw{overflow-x:auto}
+/* 상태 배지 */
+.st{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:99px;background:#ece6dc;color:var(--ink-3)}
+.st[data-s="예매중"],.st[data-s="접수중"]{background:#fde3e1;color:var(--red)}
+.st[data-s="전시중"]{background:var(--wood-2);color:#8a5d1f}
+.st[data-s="무료"]{background:#e6efe9;color:var(--green)}
+.st[data-s="예정"]{background:#e6ecf5;color:var(--blue)}
+.st[data-s="종료"]{background:#ece6dc;color:#8b8177}
+.st[data-s="매진"],.st[data-s="취소"],.st[data-s="연기"]{background:#1d1a17;color:#fff}
+.st[data-s="임시저장"]{background:#fff3c4;color:#7a5a00}
+.st[data-s="예약"]{background:#e6ecf5;color:var(--blue)}
+/* 필터 줄 */
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.bar input[type=search],.bar select{min-height:36px;border:1px solid var(--line);border-radius:6px;padding:0 10px;background:var(--paper)}
+.chip{border:1px solid var(--line);background:var(--paper);border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+/* 편집 폼 */
+.edit{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}
+@media(max-width:1100px){.edit{grid-template-columns:1fr}}
+fieldset{border:0;padding:0;margin:0 0 8px}
+legend{font-size:15px;font-weight:700;margin-bottom:12px;padding:0}
+.f{display:grid;gap:6px;margin-bottom:14px}
+.f label{font-size:13px;font-weight:600}.f label small{font-weight:400;color:var(--ink-2);margin-left:6px}
+.f input,.f select,.f textarea{width:100%;min-height:40px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;background:#fff}
+.f textarea{min-height:120px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{outline:0;border-color:var(--wood);box-shadow:0 0 0 3px #b9844333}
+.f .hint{font-size:12px;color:var(--ink-2)}
+.f .err{font-size:12px;color:var(--red)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:600px){.row2{grid-template-columns:1fr}}
+.links{display:grid;gap:8px}.links .li{display:grid;grid-template-columns:120px 1fr auto;gap:8px}
+.links .li input{min-height:36px}
+.req::after{content:" *";color:var(--red)}
+.side-panel{position:sticky;top:20px;display:grid;gap:14px}
+.status-box{display:grid;gap:10px}
+.status-box .big{font-size:13px;color:var(--ink-2)}
+.status-box .st{font-size:14px;padding:6px 12px;width:max-content}
+.poster-drop{border:2px dashed var(--line);border-radius:var(--r);padding:16px;text-align:center;color:var(--ink-2);font-size:13px;display:grid;gap:8px;justify-items:center}
+.poster-drop img{width:120px;aspect-ratio:1/1.414;object-fit:cover;border-radius:4px;border:1px solid var(--line)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:99px;font-size:14px;box-shadow:0 10px 30px -10px #000;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1}
+.note{font-size:13px;color:var(--ink-2);border-left:3px solid var(--wood);padding-left:10px}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;font-size:14px}.kv dt{color:var(--ink-2)}
+.list{display:grid;gap:8px}.list a{display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:#fff}
+.list a:hover{border-color:var(--wood)}.list a .s{font-size:12px;color:var(--ink-2)}
+/* 로그인 */
+.login{min-height:100vh;display:grid;place-items:center;padding:20px}
+.login .card{width:min(420px,100%);text-align:center;padding:36px 28px}
+.login .logo{justify-content:center;color:var(--ink);font-weight:700;display:flex;gap:6px;align-items:baseline;margin-bottom:6px}
+.login .logo b{color:#e0312f;font-size:22px}.login .logo span{font-family:var(--serif);letter-spacing:.12em;font-size:14px}
+.login p{color:var(--ink-2);font-size:14px;margin:6px 0 22px}
+.login .btn{width:100%;justify-content:center;min-height:46px}

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="admin.css">
+<title>공간 — 관리자</title>
+</head>
+<body><div class="app" id="app"></div>
+<script src="../data.js"></script><script src="admin.js"></script>
+<script>
+const A=window.ADMIN;
+document.getElementById("app").innerHTML=A.nav("공간")+`<main class="main">
+  <div class="top"><div><div class="crumb">공간</div><h1>공연장 · 갤러리</h1></div></div>
+  <div class="grid g2">
+    <div class="card"><h2>공연장 <a href="../space-hall.html" target="_blank">사이트에서 보기 ↗</a></h2>
+      <div class="kv"><dt>객석</dt><dd>220석</dd><dt>제원</dt><dd>무대 폭 9,755 · 깊이 9,437 · 높이 4,100 · 단 600 (mm) <span class="st">도면 표기</span></dd><dt>자료</dt><dd>평면도·단면도·장비 목록 PDF 5개</dd><dt>촬영 위치</dt><dd>4곳 (평면도 위 번호)</dd><dt>360°</dt><dd>준비 중</dd></div>
+      <div class="acts" style="margin-top:12px"><button class="btn sm">제원 수정</button><button class="btn sm">자료 올리기</button><button class="btn sm">촬영 위치 편집</button></div></div>
+    <div class="card"><h2>갤러리 <a href="../space-gallery.html" target="_blank">사이트에서 보기 ↗</a></h2>
+      <div class="kv"><dt>면적</dt><dd>146㎡ 오픈형</dd><dt>관람</dt><dd>화–일 10:00–19:00 · 월 휴관</dd><dt>반입·철수</dt><dd>월 13:00–18:00 · 월 09:00–12:00</dd><dt>사진</dt><dd>5장</dd><dt>도면</dt><dd>없음 — 촬영·실측 후 추가</dd></div>
+      <div class="acts" style="margin-top:12px"><button class="btn sm">운영 정보 수정</button><button class="btn sm">사진 올리기</button></div></div>
+    <div class="card"><h2>음향 체험 (VICELLO)</h2><p class="note">현장 녹음이 준비되기 전에는 이 항목을 만들지 않습니다. 준비되면 음원·프리셋별 파일·녹음 위치·녹음 방법을 등록합니다.</p></div>
+    <div class="card"><h2>층별 안내</h2><div class="kv"><dt>평면도</dt><dd>1F~6F 6장 (현재 홈페이지 이미지)</dd></div><div class="acts" style="margin-top:12px"><button class="btn sm">평면도 교체</button></div></div>
+  </div></main>`;
+</script></body></html>

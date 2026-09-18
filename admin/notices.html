@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="admin.css">
+<title>소식 — 관리자</title>
+</head>
+<body><div class="app" id="app"></div>
+<script src="../data.js"></script><script src="admin.js"></script>
+<script>
+const A=window.ADMIN,db=A.db,esc=A.esc,Q=new URLSearchParams(location.search);
+let cur=Q.get("new")?{id:A.uid("n"),title:"",category:"안내",date:A.TODAY,pinned:false,body:"",draft:true,isNew:true}:null;
+function render(){
+  document.getElementById("app").innerHTML=A.nav("소식")+`<main class="main">
+  <div class="top"><div><div class="crumb">소식</div><h1>공지 ${db.notices.length}건</h1></div><div class="acts"><button class="btn accent" id="new">+ 새 공지</button></div></div>
+  <div class="edit" style="grid-template-columns:${cur?"minmax(0,1fr) 420px":"1fr"}">
+    <div class="card" style="padding:0"><div class="tw"><table><tr><th>분류</th><th>제목</th><th>날짜</th><th>상태</th><th></th></tr>
+      ${[...db.notices].sort((a,b)=>(b.pinned-a.pinned)||(a.date<b.date?1:-1)).map(n=>`<tr><td><span class="st">${n.category}</span></td><td><span class="t">${n.pinned?"📌 ":""}${esc(n.title)}</span></td><td>${n.date}</td><td><span class="st" data-s="${n.draft?"임시저장":"예정"}">${n.draft?"임시저장":"게시됨"}</span></td><td style="text-align:right;white-space:nowrap"><button class="btn sm" data-edit="${n.id}">편집</button> <button class="btn sm" data-pin="${n.id}">${n.pinned?"고정 해제":"상단 고정"}</button></td></tr>`).join("")}
+    </table></div></div>
+    ${cur?`<aside class="card side-panel" style="display:block"><h2>${cur.isNew?"새 공지":"공지 편집"}</h2>
+      <div class="f"><label class="req">제목</label><input id="title" value="${esc(cur.title)}"></div>
+      <div class="row2"><div class="f"><label>분류</label><select id="category">${["안내","대관","채용","휴관"].map(c=>`<option ${cur.category===c?"selected":""}>${c}</option>`).join("")}</select></div><div class="f"><label>날짜</label><input id="date" type="date" value="${cur.date}"></div></div>
+      <div class="f"><label>본문</label><textarea id="body" placeholder="이미지로만 안내하지 말고 글로도 적어 주세요.">${esc(cur.body)}</textarea></div>
+      <div class="f"><label><input type="checkbox" id="pinned" ${cur.pinned?"checked":""}> 상단 고정 (최대 2건)</label></div>
+      <div class="f"><label>첨부</label><button type="button" class="btn sm">+ 파일·이미지 추가</button></div>
+      <div class="acts"><button class="btn" id="draft">임시 저장</button><button class="btn primary" id="pub">게시</button><button class="btn" id="close">닫기</button></div></aside>`:""}
+  </div></main>`;
+  document.getElementById("new").onclick=()=>{cur={id:A.uid("n"),title:"",category:"안내",date:A.TODAY,pinned:false,body:"",draft:true,isNew:true};render()};
+  document.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>{cur=db.notices.find(n=>n.id===b.dataset.edit);render()});
+  document.querySelectorAll("[data-pin]").forEach(b=>b.onclick=()=>{const n=db.notices.find(n=>n.id===b.dataset.pin);if(!n.pinned&&db.notices.filter(x=>x.pinned).length>=2){A.toast("고정 공지는 2건까지입니다");return}n.pinned=!n.pinned;A.save();render()});
+  if(cur){const col=()=>{cur.title=document.getElementById("title").value;cur.category=document.getElementById("category").value;cur.date=document.getElementById("date").value;cur.body=document.getElementById("body").value;cur.pinned=document.getElementById("pinned").checked};
+    const keep=()=>{if(cur.isNew){delete cur.isNew;db.notices.unshift(cur)}A.save()};
+    document.getElementById("draft").onclick=()=>{col();cur.draft=true;keep();A.toast("임시 저장했습니다");render()};
+    document.getElementById("pub").onclick=()=>{col();if(!cur.title.trim()){A.toast("제목을 적어 주세요");return}cur.draft=false;keep();A.toast("게시했습니다");cur=null;render()};
+    document.getElementById("close").onclick=()=>{cur=null;render()}}
+}
+render();
+</script></body></html>
