@@ -331,3 +331,7 @@ body::before{background:
 .curtain::after{background:linear-gradient(90deg,#0e0a0899,#0e0a0800 12%),linear-gradient(270deg,#0e0a0899,#0e0a0800 12%),repeating-linear-gradient(90deg,#00000000 0 26px,#0000001f 26px 40px,#00000000 40px 64px)}
 .hero .wrap{position:relative;z-index:2}
 .hero h1,.hero .lead,.hero p.lead,.hero .nums,.hero .facts,.hero .tabs{text-shadow:0 2px 14px #000000b3}
+
+/* 보기 방식 전환 버튼 (푸터) */
+.linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--wood);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.linkbtn:hover{color:var(--ink)}
