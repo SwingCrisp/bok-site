@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>소식 — 비오케이아트센터 (시안 A)</title>
-<link rel="stylesheet" href="fonts.css?v=202609230025"><link rel="stylesheet" href="site.css?v=202609230025">
+<link rel="stylesheet" href="fonts.css?v=202609230033"><link rel="stylesheet" href="site.css?v=202609230033">
 <style>
 /* 소식: 제목 줄 → 고정 공지 2건(판) → 분류 필터 + 목록(표 형태) → 쪽 번호. 모바일: 표를 2줄 카드로. */
 .pins{display:grid;grid-template-columns:1fr 1fr;gap:24px}
@@ -40,7 +40,7 @@
     <nav class="pager" aria-label="쪽"><a href="#" aria-current="page">1</a><a href="#">2</a><a href="#">3</a><a href="#" aria-label="다음">›</a></nav>
   </section>
 </div></main>
-<script src="data.js?v=202609230025"></script><script src="site.js?v=202609230025"></script>
+<script src="data.js?v=202609230033"></script><script src="site.js?v=202609230033"></script>
 <script>
 const N=window.BOK.notices,$=s=>document.querySelector(s),esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),dt=d=>d?d.replaceAll("-","."):"—";
 $("#pins").innerHTML=N.filter(n=>n.pin).map(n=>`<a class="panel" href="notice.html"><span class="k"><span class="pill">${n.tag}</span>고정</span><h3>${esc(n.title)}</h3><time>${dt(n.date)}</time></a>`).join("");

@@ -52,4 +52,6 @@
   if (!still && "IntersectionObserver" in window) document.documentElement.classList.add("js-motion");
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.06 });
   document.querySelectorAll(".rv").forEach((el) => io.observe(el));
+  // 안전장치: 관찰자가 동작하지 않는 환경(숨겨진 탭·구형 브라우저)에서도 1.5초 뒤에는 모두 보이게
+  setTimeout(() => document.querySelectorAll(".rv:not(.in)").forEach((el) => el.classList.add("in")), 1500);
 })();

@@ -286,8 +286,8 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
     repeating-linear-gradient(90deg,#00000000 0 26px,#00000033 26px 40px,#00000000 40px 64px);
   -webkit-mask:linear-gradient(90deg,#000 0,#000 16%,transparent 26%,transparent 74%,#000 84%,#000 100%);mask:linear-gradient(90deg,#000 0,#000 16%,transparent 26%,transparent 74%,#000 84%,#000 100%)}
 /* 커튼 색을 쓰는 곳 */
-.band{background:linear-gradient(180deg,#1c1714,#171310)}
-.band::before{background:radial-gradient(900px 500px at 88% 0%,#6e303628,transparent 60%),radial-gradient(700px 400px at 5% 100%,#dcae7214,transparent 60%)}
+.band{background:linear-gradient(180deg,#1c1714b3,#171310b3)}
+.band::before{background:none}
 blockquote{border-left-color:var(--velvet)}
 .greet blockquote{border-left:2px solid var(--velvet)}
 .pins a.panel{border-left:3px solid var(--velvet)}
@@ -351,3 +351,12 @@ html.js-motion .rv.in{opacity:1;transform:none}
 .card .poster img{transition:transform .3s ease}
 .card:hover .poster img,.card:focus-visible .poster img{transform:scale(1.02)}
 .look .big img,.spaces2 a[href*="gallery"] img{filter:saturate(.95)}
+
+/* ───────── v3.5 조명이 보이게 (2026-09-23) ─────────
+   사용자·외부인 모두 조명과 입자를 인지하지 못함. 입자는 제거(비용만 있고 효과 없음), 조명은 '보이는 무대 조명'으로 키운다. */
+body::after{display:none}
+body::before{background:
+    radial-gradient(1300px 900px at var(--lx) var(--ly),#e2b57a80 0%,#e2b57a33 35%,transparent 65%),
+    radial-gradient(1000px 760px at var(--vx) var(--vy),#9a4454 0%,#9a445480 30%,transparent 62%);
+  opacity:.9}
+@media(prefers-reduced-motion:reduce){body::before{background:radial-gradient(1300px 900px at 20% 8%,#e2b57a80 0%,#e2b57a33 35%,transparent 65%),radial-gradient(1000px 760px at 90% 100%,#9a4454 0%,#9a445480 30%,transparent 62%)}}

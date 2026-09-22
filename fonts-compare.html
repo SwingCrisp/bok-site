@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>글꼴 비교 — 비오케이아트센터</title>
+<link rel="stylesheet" href="fonts.css?v=202609230033">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css">
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;600;700&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@400;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#15110f;--bg-2:#1c1714;--ink:#f5eee2;--ink-2:#c6b9a6;--ink-3:#e2d7c7;--wood:#dcae72}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",system-ui,sans-serif;padding:48px;line-height:1.6;word-break:keep-all}
+h1{font-size:28px;margin-bottom:6px}.lead{color:var(--ink-2);max-width:70ch;margin-bottom:32px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:1100px){.grid{grid-template-columns:1fr}}
+.s{background:linear-gradient(160deg,#ffffff0d,#ffffff04);border:1px solid #ffffff0f;border-radius:10px;padding:28px;display:grid;gap:14px}
+.s .tag{font-size:12px;color:var(--wood);display:flex;justify-content:space-between;gap:10px}
+.s .h{font-size:56px;line-height:1.1;letter-spacing:-.02em;font-weight:700}.s .h em{font-style:normal;color:var(--wood)}
+.s .h2{font-size:28px;font-weight:600;line-height:1.25}
+.s .date{font-size:40px;font-weight:700;line-height:1}
+.s .date em{font-style:normal;font-size:14px;color:var(--ink-2);margin-left:8px;font-weight:500}
+.s .p{font-size:16px;color:var(--ink-3);max-width:44ch}
+.s .small{font-size:13px;color:var(--ink-2)}
+.s .card{font-size:15px;font-weight:500;line-height:1.4}
+.s .note{font-size:12px;color:var(--ink-2);border-top:1px solid #ffffff14;padding-top:10px}
+.pick{outline:2px solid var(--wood)}
+</style>
+</head>
+<body>
+<h1>글꼴 조합 비교</h1>
+<p class="lead">같은 문장을 후보 조합으로 놓았습니다. 제목(명조)은 후보별로 다르고, 본문은 각 칸 표시대로입니다. 어두운 배경·크림색 글자 기준. 모두 상업 이용 무료(라이선스는 각 칸 하단).</p>
+<div class="grid" id="g"></div>
+<script>
+const C=[
+ ["현재: 마루 부리 + Pretendard","'Maru Buri',serif","'Pretendard Variable',sans-serif","마루 부리: 네이버(무료·재배포 가능, 굵기 최대 700, 3종 1.3MB) / Pretendard: OFL(가변 2MB)"],
+ ["함렛(Hahmlet) + Pretendard","'Hahmlet',serif","'Pretendard Variable',sans-serif","함렛: OFL(구글 폰트, 가변 100–900) — 획 대비가 커서 무대 조명 톤과 어울림 / Pretendard OFL"],
+ ["고운바탕 + Pretendard","'Gowun Batang',serif","'Pretendard Variable',sans-serif","고운바탕: OFL(구글 폰트, 400·700) — 부드럽고 얇은 편, 어두운 배경에서 가늘어 보일 수 있음"],
+ ["본명조(Noto Serif KR) + 본고딕(Noto Sans KR)","'Noto Serif KR',serif","'Noto Sans KR',sans-serif","둘 다 OFL(구글 폰트). 가장 무난하고 굵기 폭이 넓음(100–900). 개성은 덜함"],
+ ["나눔명조 + SUIT","'Nanum Myeongjo',serif","'SUIT Variable',sans-serif","나눔명조: OFL(구글 폰트, 400·700·800) — 전통적 인상 / SUIT: OFL(가변, 본문이 조금 더 좁고 현대적)"],
+ ["마루 부리 + SUIT","'Maru Buri',serif","'SUIT Variable',sans-serif","현재 제목 유지, 본문만 SUIT로 — 숫자·영문이 더 단정함"],
+];
+document.getElementById("g").innerHTML=C.map(([n,h,b],i)=>`<section class="s${i===0?" pick":""}" style="font-family:${b}">
+ <div class="tag"><span>${n}</span><span>${i===0?"현재":""}</span></div>
+ <div class="h" style="font-family:${h}">가까이에서<br>듣는 <em>무대</em></div>
+ <div class="h2" style="font-family:${h}">지금, 그리고 곧 · 방문 전에, 먼저 둘러보세요</div>
+ <div class="date" style="font-family:${h}">10.3<em>토요일 · 공연장</em> &nbsp; 220석 · 146㎡</div>
+ <p class="p">객석 어디서든 무대가 가깝습니다. 세종의 공연과 전시가 한 층에서 열리는 곳, 비오케이아트센터. 관람 시간 화–일 10:00–19:00, 월요일 휴관.</p>
+ <div class="card">지브리와 사랑에 빠지다 : 지브리 영화음악 콘서트 2026 — 세종<br><span class="small">공연 · 공연장 · 10.3 토 · 5세 이상 · 예매중</span></div>
+ <div class="note">${C[i][3]}</div></section>`).join("");
+</script>
+</body></html>
