@@ -360,3 +360,14 @@ body::before{background:
     radial-gradient(1000px 760px at var(--vx) var(--vy),#9a4454 0%,#9a445480 30%,transparent 62%);
   opacity:.9}
 @media(prefers-reduced-motion:reduce){body::before{background:radial-gradient(1300px 900px at 20% 8%,#e2b57a80 0%,#e2b57a33 35%,transparent 65%),radial-gradient(1000px 760px at 90% 100%,#9a4454 0%,#9a445480 30%,transparent 62%)}}
+
+/* ───────── v3.6 글꼴 확정 (2026-09-23, reviews/2026-09-23-fonts.md) ─────────
+   마루 부리 600·700(제목·인용·큰 숫자) + Pretendard(그 외 전부). 명조는 제목에만 집중해 위계를 살린다. */
+header.site li a,.lead,.page-head p,.space p,.card .meta{font-family:var(--sans)}
+header.site li a{font-weight:500;letter-spacing:-.01em}
+.lead,.page-head p{font-size:17px;line-height:1.7;font-weight:400}
+.card .meta{font-size:13px;font-weight:500;letter-spacing:0}
+.card h3{font-weight:600}
+h2{font-size:clamp(28px,2.8vw,42px);line-height:1.25}
+dl.facts,table,.kv,.nums div,.strip{font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--serif)} /* 눈썹은 명조 유지: 장식 역할 */
