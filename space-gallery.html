@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>갤러리 — 비오케이아트센터 (시안 A)</title>
-<link rel="stylesheet" href="fonts.css?v=202609181455">
-<link rel="stylesheet" href="site.css?v=202609181455">
+<link rel="stylesheet" href="fonts.css?v=202609230025">
+<link rel="stylesheet" href="site.css?v=202609230025">
 <style>
 /* 갤러리: 페이지 제목 → 01 사진으로 보기(큰 사진 + 썸네일) → 02 운영·반입 정보(판 3개) → 03 대관 절차 → 대관 CTA. 모바일 1단. */
 .tabs{display:flex;gap:8px}.tabs a{font-size:14px;padding:8px 16px;border:1px solid var(--line);border-radius:99px}.tabs a[aria-current]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
@@ -25,8 +25,8 @@
 .steps li::before{content:counter(s,decimal-leading-zero);display:block;font-family:var(--serif);font-size:20px;color:var(--wood);margin-bottom:8px}
 .steps b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
 @media(max-width:1199px){.steps{grid-template-columns:repeat(4,1fr)}}@media(max-width:899px){.steps{grid-template-columns:1fr 1fr}}
-.cta{margin-top:var(--sec);background:linear-gradient(90deg,#15110ff2 30%,#15110f99),url(assets/gallery-1.jpg) center/cover;border:1px solid var(--line);border-radius:var(--r);padding:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-@media(max-width:899px){.cta{padding:28px 20px}.cta .btn{width:100%}}
+.rental-cta{margin-top:var(--sec);background:linear-gradient(90deg,#15110ff2 30%,#15110f99),url(assets/gallery-1.jpg) center/cover;border:1px solid var(--line);border-radius:var(--r);padding:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+@media(max-width:899px){.rental-cta{padding:28px 20px}.rental-cta .btn{width:100%}}
 </style>
 </head>
 <body data-nav="공간·대관">
@@ -64,9 +64,9 @@
     <p class="note" style="margin-top:16px">현재 홈페이지의 갤러리 대관 안내(7단계)를 그대로 옮겼습니다. 계좌 등 결제 정보는 승인 후 개별 안내로 옮기고 화면에는 싣지 않습니다.</p>
   </section>
 
-  <div class="cta"><div><p class="eyebrow">대관</p><h2>이 공간에서 전시를 준비하신다면</h2><p style="color:var(--ink-3);margin-top:8px">희망 기간을 남겨 주시면 담당자가 가능 여부를 확인해 연락드립니다.</p></div><p class="btns"><a class="btn solid" href="rental.html">희망일로 대관 문의</a><a class="btn" href="space-hall.html">공연장 보기</a></p></div>
+  <div class="rental-cta"><div><p class="eyebrow">대관</p><h2>이 공간에서 전시를 준비하신다면</h2><p style="color:var(--ink-3);margin-top:8px">희망 기간을 남겨 주시면 담당자가 가능 여부를 확인해 연락드립니다.</p></div><p class="btns"><a class="btn solid" href="rental.html">희망일로 대관 문의</a><a class="btn" href="space-hall.html">공연장 보기</a></p></div>
 </div></main>
-<script src="site.js?v=202609181455"></script>
+<script src="site.js?v=202609230025"></script>
 <script>
 const PH=[["assets/gallery-c.jpg","전시 전경 · 벽면과 조명 레일"],["assets/gallery-1.jpg","관람 모습 · 원형 작품 연작"],["assets/gallery-b.jpg","전시 전경"],["assets/gallery-d.jpg","전시 전경"],["assets/gallery-e.jpg","전시 전경"]];
 const big=document.querySelector("#big"),th=document.querySelector("#thumbs");

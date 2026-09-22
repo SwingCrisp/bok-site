@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>비오케이아트센터 시안</title>
-<link rel="stylesheet" href="fonts.css?v=202609181455">
-<link rel="stylesheet" href="site.css?v=202609181455">
+<link rel="stylesheet" href="fonts.css?v=202609230025">
+<link rel="stylesheet" href="site.css?v=202609230025">
 <style>
 /* 홈 구성: 히어로 → 01 지금·곧 → 02 이번 달 일정(띠) → 03 공간·음향 → 04 소식 · 05 방문 안내 → 푸터(사이트맵)
    PC: 섹션마다 번호 머리 + 구분선, 02와 04·05는 어두운 띠(.band)로 구역을 나눈다. 모바일: 같은 순서, 1단. */
@@ -28,8 +28,8 @@
 .next .big{font-family:var(--serif);font-size:44px;font-weight:700;line-height:1.05;letter-spacing:-.02em;margin:2px 0 8px}
 .next .big em{font-style:normal;font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink-2);margin-left:8px;letter-spacing:0}
 .next b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:14px;line-height:1.45;font-weight:600}
-.next .cta{margin-top:auto;padding-top:10px;font-size:13px;font-weight:600;color:var(--wood);display:flex;align-items:center;gap:8px}
-.next .cta i{font-style:normal;font-size:11px;background:var(--red);color:#fff;padding:3px 8px;border-radius:99px}
+.next .next-action{margin-top:auto;padding-top:10px;font-size:13px;font-weight:600;color:var(--wood);display:flex;align-items:center;gap:8px}
+.next .next-action i{font-style:normal;font-size:11px;background:var(--red);color:#fff;padding:3px 8px;border-radius:99px}
 @media(max-width:1099px){.hero .wrap{grid-template-columns:1fr}.next{max-width:360px}}
 @media(max-width:899px){.hero{height:auto;max-height:none;min-height:auto}.hero>img{height:58vw;min-height:280px;object-position:55% 40%}.hero::before{background:linear-gradient(180deg,#15110f66 0%,transparent 30%,transparent 55%,var(--bg) 100%)}.hero .wrap{padding-top:calc(58vw - 40px);padding-bottom:32px;gap:24px}.lead{font-size:16px}.facts{flex-wrap:wrap;max-width:none}.facts div{padding-right:28px}}
 
@@ -70,7 +70,7 @@
   <div class="spaces">
     <article class="space rv"><img src="assets/hall-seats.jpg" alt="무대에서 바라본 공연장 객석과 목재 벽면" loading="lazy"><div class="in"><h3>공연장</h3><p>220석. 평면도의 위치별 사진, 제원, 장비 목록.</p><p class="btns"><a class="btn solid" href="space-hall.html">공간 둘러보기</a></p></div></article>
     <article class="space rv"><img src="assets/gallery-c.jpg" alt="관람객이 작품을 보고 있는 갤러리 내부" loading="lazy"><div class="in"><h3>갤러리</h3><p>146㎡ 오픈형. 반입·철수 시간과 대관 절차.</p><p class="btns"><a class="btn solid" href="space-gallery.html">공간 둘러보기</a></p></div></article>
-    <article class="space snd rv"><div class="wave" aria-hidden="true" id="wave"></div><div class="in"><p class="eyebrow">음향</p><h3 style="margin-top:10px">같은 연주, 다른 울림</h3><p>음장가변 시스템 VICELLO의 OFF와 실제 프리셋을 현장 녹음으로 비교합니다. 웹에서 만든 잔향은 쓰지 않습니다.</p><p class="btns"><a class="btn" aria-disabled="true" href="#">들어보기 · 준비 중</a><a class="btn" href="rental.html">현장 청음 문의</a></p></div></article>
+    <article class="space snd rv"><div class="wave" aria-hidden="true" id="wave"></div><div class="in"><p class="eyebrow">음향</p><h3 style="margin-top:10px">같은 연주, 다른 울림</h3><p>음장가변 시스템 VICELLO의 OFF와 실제 프리셋을 현장 녹음으로 비교합니다. 웹에서 만든 잔향은 쓰지 않습니다.</p><p class="btns"><span class="btn" aria-disabled="true">들어보기 · 준비 중</span><a class="btn" href="rental.html">현장 청음 문의</a></p></div></article>
   </div>
 </div></section>
 
@@ -82,12 +82,12 @@
 </div></section></div>
 </main>
 
-<script src="data.js?v=202609181455"></script>
-<script src="site.js?v=202609181455"></script>
+<script src="data.js?v=202609230025"></script>
+<script src="site.js?v=202609230025"></script>
 <script>
 const D=window.BOK,$=s=>document.querySelector(s),esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),wk="일월화수목금토";
 const nx=D.programs.find(p=>p.type==="공연"),[dd,wd]=nx.dateText.split(" ");
-$("#next").innerHTML=`<img src="${nx.img}" alt="${esc(nx.title)} 포스터"><div class="tx"><small>NEXT · 다음 공연</small><div class="big">${dd}<em>${wd}요일 · ${nx.place}</em></div><b>${esc(nx.title)}</b><span class="cta"><i>${nx.status}</i>자세히 보기 →</span></div>`;
+$("#next").innerHTML=`<img src="${nx.img}" alt="${esc(nx.title)} 포스터"><div class="tx"><small>NEXT · 다음 공연</small><div class="big">${dd}<em>${wd}요일 · ${nx.place}</em></div><b>${esc(nx.title)}</b><span class="next-action"><i>${nx.status}</i>자세히 보기 →</span></div>`;
 const railEl=$("#rail");
 function rail(f){railEl.innerHTML=D.programs.filter(p=>f==="전체"||p.type===f).map(p=>`<a class="card" href="program.html"><div class="poster"><img src="${p.img}" alt="${esc(p.title)} 포스터" loading="lazy"><span class="badge" data-s="${p.status}">${p.status}</span><span class="org" data-o="${p.org}">${p.org}</span></div><div class="meta">${p.type} · ${p.place}</div><h3>${esc(p.title)}</h3><p>${p.dateText}</p></a>`).join("");railEl.scrollLeft=0}
 rail("전체");

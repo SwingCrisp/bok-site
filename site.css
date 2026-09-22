@@ -291,7 +291,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 blockquote{border-left-color:var(--velvet)}
 .greet blockquote{border-left:2px solid var(--velvet)}
 .pins a.panel{border-left:3px solid var(--velvet)}
-.cta{background:linear-gradient(90deg,#15110ff2 30%,#3a1e2299),url(assets/hall-side.jpg) center/cover !important}
+.rental-cta{background:linear-gradient(90deg,#15110ff2 30%,#3a1e2299),url(assets/hall-side.jpg) center/cover}
 .space::after{background:linear-gradient(180deg,transparent 28%,#160c0ef0 100%)}
 .btn.solid:hover{background:#e6bb84}
 .badge[data-s="전시중"]{background:var(--velvet);color:#f5eee2}
@@ -314,7 +314,7 @@ footer.site{background:linear-gradient(180deg,#171310,#120c0c)}
 .space.snd .in{padding-top:150px}
 @media(max-width:1199px){.space.snd .in{padding-top:150px}}
 @media(max-width:899px){.space>img{aspect-ratio:16/9}}
-.cta{background:linear-gradient(90deg,#15110ff5 0%,#15110ff2 55%,#3a1e22b3 100%),url(assets/hall-side.jpg) center/cover !important}
+.rental-cta{background:linear-gradient(90deg,#15110ff5 0%,#15110ff2 55%,#3a1e22b3 100%),url(assets/hall-side.jpg) center/cover}
 .card p,.row .sub,.nlist time,.tbl time,.dl a span,.crumb,.note,footer.site .legal{color:var(--ink-2)}
 .card .meta{color:var(--wood)}
 .strip button,.strip span{font-size:14px}.strip small{font-size:11px;opacity:1}
@@ -335,3 +335,19 @@ body::before{background:
 /* 보기 방식 전환 버튼 (푸터) */
 .linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--wood);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .linkbtn:hover{color:var(--ink)}
+
+/* ───────── v3.4 ChatGPT 검토 반영 (2026-09-23, reviews/2026-09-23-home-overall.md) ─────────
+   ① .cta 충돌 제거(.rental-cta / .next-action)  ② 모바일 일정 2열·패널 18px  ③ 콘텐츠는 기본 표시(.rv는 JS가 준비된 뒤에만 숨김)
+   ④ 포스터 호버 300ms·1.02  ⑤ 갤러리 사진 세피아 해제  ⑥ 작은 버튼 터치 44px */
+@media(max-width:899px){
+  .row{grid-template-columns:44px minmax(0,1fr);gap:6px 12px;padding:16px 0}
+  .row .go{grid-column:2}.row h3{font-size:16px}
+  .panel{padding:18px}
+  .btn.sm,.more{min-height:44px}
+}
+.rv{opacity:1;transform:none}
+html.js-motion .rv{opacity:0;transform:translateY(14px)}
+html.js-motion .rv.in{opacity:1;transform:none}
+.card .poster img{transition:transform .3s ease}
+.card:hover .poster img,.card:focus-visible .poster img{transform:scale(1.02)}
+.look .big img,.spaces2 a[href*="gallery"] img{filter:saturate(.95)}

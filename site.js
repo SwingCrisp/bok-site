@@ -49,6 +49,7 @@
     addEventListener("pointermove", (e) => { mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; ask(); }, { passive: true });
     paint();
   }
+  if (!still && "IntersectionObserver" in window) document.documentElement.classList.add("js-motion");
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.06 });
   document.querySelectorAll(".rv").forEach((el) => io.observe(el));
 })();
